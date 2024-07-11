@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Header와 Footer가 있는 레이아웃</title>
+    <link rel="stylesheet" th:href="@{/css/public/public.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<main layout:fragment="main"></main>
+<footer th:replace="~{public/footer :: footer}"></footer>
+</body>
+</html>

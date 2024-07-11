@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{public/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="../../static/css/public/public.css">
+    <link rel="stylesheet" href="../../static/css/Main.css">
+</head>
+<body>
+    <div class="home" layout:fragment="main">
+        <h3>딜리버리 클럽</h3>
+        <section class="menu">
+            <div class="menu-icon">
+                <img src="../../static/img/sushi.png" height="64" width="64"/>
+                <a href="#">일식</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/spaghetti.png" height="64" width="64"/>
+                <a href="#">양식</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/noodles.png" height="64" width="64"/>
+                <a href="#">중식</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/bibimbap.png" height="64" width="64"/>
+                <a href="#">한식</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/coffee.png" height="64" width="64"/>
+                <a href="#">카페</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/piza.png" height="64" width="64"/>
+                <a href="#">피자</a>
+            </div>
+            <div class="menu-icon">
+                <img src="../../static/img/fried-chicken.png" height="64" width="64"/>
+                <a href="#">치킨</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
