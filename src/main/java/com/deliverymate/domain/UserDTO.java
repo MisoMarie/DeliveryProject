@@ -1,21 +1,22 @@
 package com.deliverymate.domain;
 
-import java.util.List;
 
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
-    private String id;
+    private Integer id;
     private String password;
     private String phone;
     private String email;
     private String name;
-    private ImageDTO image;
-    private String nickname;
+    private byte[] userImage;
+    private String nickName;
     private List<CartDTO> carts;
 }
