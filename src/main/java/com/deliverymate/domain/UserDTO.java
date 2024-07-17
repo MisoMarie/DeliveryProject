@@ -10,6 +10,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDTO {
     private Integer id;
     private String password;
@@ -20,3 +21,5 @@ public class UserDTO {
     private String nickName;
     private List<CartDTO> carts;
 }
+
+
