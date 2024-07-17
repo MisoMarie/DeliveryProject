@@ -1,0 +1,53 @@
+@import "public.css";
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-bg-color);
+    padding: 30px;
+}
+
+.header-main > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-div a{
+    display: flex;
+    align-items: center;
+}
+
+.input-div input {
+    width: 90%;
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-div button{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin-left: 10px;
+}
+
+.input-div input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0, 86, 179, 0.25);
+}
+
+.header-user-section a{
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px 10px;
+    text-decoration: none;
+    color: var(--color-a-color);
+    margin-bottom: 5px;
+    transition: color 0.3s;
+}

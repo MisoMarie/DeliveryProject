@@ -1,57 +1,52 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      layout:decorate="~{public/layout}"
 >
 <head>
     <meta charset="UTF-8">
     <title>Footer</title>
-    <link rel="stylesheet" href="../../static/css/public/public.css">
-    <link rel="stylesheet" href="../../static/css/public/Footer.css">
+<!--    <link rel="stylesheet" href="../../static/css/public/public.css">-->
+<!--    <link rel="stylesheet" href="../../static/css/public/footer.css">-->
 </head>
-<body layout:fragment="footer">
-    <div class="footer-main">
-        <a href="#">좋아요</a>
-        <a href="#">주문내역</a>
-        <a href="#">MYPAGE</a>
-    </div>
-    <div class="footer">
-        <div class="footer-section">
-            <h4>INFORMATION</h4>
-            <a href="#">ABOUT</a>
-            <a href="#">공지사항</a>
-            <a href="#">이용약관</a>
-            <a href="#">개인정보처리방침</a>
-        </div>
-        <div class="footer-section">
-            <h4>CUSTOMER SERVICE</h4>
-            <a href="#">MEMBERSHIP</a>
-            <a href="#">EVENT</a>
-        </div>
-        <div class="footer-section">
-            <h4>SOCIAL</h4>
-            <a href="#">INSTAGRAM</a>
-            <a href="#">FACEBOOK</a>
-            <a href="#">BLOG</a>
-            <a href="#">KAKAOTALK</a>
-            <a href="#">YOUTUBE</a>
-        </div>
-        <div class="footer-section">
-            <h4>CS</h4>
-            <a href="tel:1234-1234">1234-1234</a>
-            <p>MON - FRI 09:00 ~ 17:00</p>
-            <p>LUNCH TIME 12:00 ~ 13:00</p>
-            <p>WEEKEND.HOLIDAY OFF</p>
-            <a href="#">자주 묻는 질문</a>
-        </div>
-        <div class="footer-section">
-            <h4>COMPANY</h4>
-            <p>OFFICE: 1234-5678</p>
-            <p>BUSINESS NUMBER: 123-45-6789</p>
-            <p>ADDRESS: 대구광역시 중구 중앙대로 366 9층, 10층</p>
-            <p>Copyright 2019. ALL Rights Reserved.</p>
+<body th:fragment="footer">
+    <div class="footer-all">
+        <div class="footer">
+            <div class="footer-section">
+                <h4>INFORMATION</h4>
+                <a href="#">ABOUT</a>
+                <a href="#">공지사항</a>
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+            </div>
+            <div class="footer-section">
+                <h4>CUSTOMER SERVICE</h4>
+                <a href="#">MEMBERSHIP</a>
+                <a href="#">EVENT</a>
+            </div>
+            <div class="footer-section">
+                <h4>SOCIAL</h4>
+                <a href="#">INSTAGRAM</a>
+                <a href="#">FACEBOOK</a>
+                <a href="#">BLOG</a>
+                <a href="#">KAKAOTALK</a>
+                <a href="#">YOUTUBE</a>
+            </div>
+            <div class="footer-section">
+                <h4>CS</h4>
+                <a href="tel:1234-1234">1234-1234</a>
+                <p>MON - FRI 09:00 ~ 17:00</p>
+                <p>LUNCH TIME 12:00 ~ 13:00</p>
+                <p>WEEKEND.HOLIDAY OFF</p>
+                <a href="#">자주 묻는 질문</a>
+            </div>
+            <div class="footer-section">
+                <h4>COMPANY</h4>
+                <p>OFFICE: 1234-5678</p>
+                <p>BUSINESS NUMBER: 123-45-6789</p>
+                <p>ADDRESS: 대구광역시 달서구 상인동</p>
+                <p>Copyright 2019. ALL Rights Reserved.</p>
+            </div>
         </div>
     </div>
 </body>

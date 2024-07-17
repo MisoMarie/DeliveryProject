@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{public/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main layout:fragment="main" class="store">
+    <div class="img-div">
+        <section class="img-container">
+            <div class="img"></div>
+            <div class="img"></div>
+            <div class="img"></div>
+            <div class="img"></div>
+            <div class="img"></div>
+        </section>
+    </div>
+    <section class="store-head">
+        <h1 id="store-name">가게이름 어쩌구 저쩌구</h1>
+        <div class="btn-container">
+            <button class="save-btn" type="button">
+                <i class="fa-solid fa-heart"></i>
+                <span>좋아요 취소</span>
+            </button>
+            <button class="save-btn" type="button">
+                <i class="fa-regular fa-heart"></i>
+                <span>좋아요</span>
+            </button>
+            <button class="share-btn">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                <span>공유하기</span>
+            </button>
+        </div>
+    </section>
+    <section class="store-info">
+        <p>최소 주문금액: 18000원</p>
+        <p>결제방법: 바로결제 만나서결제</p>
+        <p>배달시간: 40~55분</p>
+        <p>배달팁: 무료</p>
+    </section>
+    <form class="store-menu">
+        <div class="menus">
+            <figure>
+                <img src="/img/mcdonald/bicmac.png" alt="#"/>
+            </figure>
+            <div>
+                <p>빅맥이다</p>
+                <p>참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
+                <p>100만원</p>
+                <select class="number-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="menus">
+            <figure>
+                <img src="https://kfcapi.inicis.com/kfcs_api_img/KFCS/goods/DL_2176697_20240528163012658.png" alt="#"/>
+            </figure>
+            <div>
+                <p>더블쿼터파운드</p>
+                <p>더블쿼터파운드임</p>
+                <p>200만원</p>
+                <select class="number-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="menus">
+            <figure>
+                <img src="/img/mcdonald/mcspicy.png" alt="#"/>
+            </figure>
+            <div>
+                <p>맥스파이시</p>
+                <p>맥스파이시임</p>
+                <p>50만원</p>
+                <select class="number-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <p>총 합계: 100000만원</p>
+        <button>주문하기</button>
+    </form>
+    <section class="store-position-section">
+        <h3>가게 위치</h3>
+        <div id="store-position-text">상인동, 대구광역시, 한국</div>
+        <div class="store-map-cover" >
+            <div id="store-position-map"></div>
+        </div>
+    </section>
+
+    <section class="review-section">
+        <div class="review-section-header">
+            <h3>후기 ???개</h3>
+            <ul>
+                <li>
+                    <a href="#">최신순</a>
+                    <span>|</span>
+                    <a href="#" >평점 높은 순</a>
+                    <span>|</span>
+                    <a href="#">평점 낮은 순</a>
+                </li>
+            </ul>
+        </div>
+
+        <article class="review-container">
+            <section class="review">
+                <div class="reviewer-container">
+                    <img class="reviewer-img" src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2024/03/12/1710248677621.png?RS=62x60&CS=60x60" alt="#">
+                    <span class="reviewer-nickname">Haruuu</span>
+                </div>
+                <div class="review-content-container">
+                    <div class="review-header">
+                            <span class="review-score">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        <span class="review-date">2024.04.02</span>
+                    </div>
+                    <div class="review-body">
+                        <p class="review-content">
+                          너무너무 맛있어요! 다시 시켜먹구싶어요!
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="review">
+                <div>현재 작성된 리뷰가 없습니다....</div>
+            </section>
+        </article>
+
+</main>
+</body>
+</html>

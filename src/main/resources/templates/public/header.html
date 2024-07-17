@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+<!--    <link rel="stylesheet" href="../../static/css/public/public.css">-->
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+
+</head>
+<body th:fragment="header">
+    <div class="header-main">
+        <div class="logo-div">
+            <a href="http://localhost:8080/main">
+                <img src="/img/logo.png" height="64" width="64"/>
+                <h2>Delivery Mate</h2>
+            </a>
+
+        </div>
+        <div class="input-div">
+            <input type="text" placeholder="찾아라 주위 맛집!">
+            <button type="button">
+                <img src="/img/search.png"/>
+            </button>
+        </div>
+        <div class="header-user-section">
+            <a href="http://localhost:8080/user/login">로그인</a>
+            <a href="#">로그아웃</a>
+            <a href="http://localhost:8080/user/register">회원가입</a>
+            <a href="http://localhost:8080/user/mypage">MYPAGE</a>
+        </div>
+    </div>
+</body>
+</html>

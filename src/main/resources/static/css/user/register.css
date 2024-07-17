@@ -1,0 +1,172 @@
+@import "../public/public.css";
+
+.register{
+    background-color: var(--color-bg-color);
+}
+
+
+.register-section{
+    width: 700px;
+    margin: 30px auto;
+}
+
+
+.register-section > form{
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px 40px;
+    background-color: var(--color-bg-color);
+}
+.register-section > form > h3{
+    margin-top: 20px;
+}
+
+.form-section{
+    display: flex;
+    margin: 8px 0;
+}
+
+.form-section label{
+    flex: 1;
+    display: flex;
+    padding: 6px 10px;
+    align-items: center;
+    font-size: var(--medium-font-size);
+    border: 1px solid black;
+    border-radius: 6px;
+    transition-duration: 0.05s;
+}
+.form-section label[active]{
+    outline: 2px solid black;
+}
+.form-section > label > i{
+    margin-left: 10px;
+    font-size: var(--xlarge-font-size);
+    color: var(--weak-color);
+}
+.form-section > label input{
+    padding: 5px 20px;
+    flex: 1;
+    font-size: var(--medium-font-size);
+    border: none;
+    outline: none;
+}
+
+#id-duplication-btn{
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+    padding: 2px 10px;
+    font-size: var(--x-small-font-size);
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    background-color: rgba(0,0,0,0.1);
+}
+#id-duplication-btn:hover{
+    color: white;
+    background-color: black;
+}
+/*************************************/
+.pw-view-btn{
+    border: none;
+    background-color: unset;
+    font-size: var(--medium-font-size);
+    cursor: pointer;
+}
+/**************************************/
+.phone-select{
+    margin-right: 10px;
+}
+.phone-select > select{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: var(--small-font-size);
+    padding: 5px 5px;
+}
+/**********************************/
+.phone-cert-section{
+    display: flex;
+    padding: unset;
+}
+.phone-cert-section > button{
+    border: none;
+    flex: 1;
+    border-radius: 6px;
+    font-size: var(--x-small-font-size);
+    font-weight: bold;
+    padding: 10px 0;
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+.phone-cert-section > button[disabled]{
+    color: white;
+}
+.phone-cert-section > button:hover{
+    background-color: black;
+    color: white;
+}
+.phone-cert-section > button[disabled]:hover{
+    color: white;
+}
+/***********************************/
+.email-select{
+    margin-left: 10px;
+}
+.email-select > select{
+    width: 100%;
+    height: 100%;
+    font-size: var(--small-font-size);
+    padding: 2px 5px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+/***********************/
+.button-section{
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+    align-items: center;
+}
+.button-section > button{
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    padding: 5px 20px;
+    font-size: var(--xxlarge-font-size);
+    cursor: pointer;
+}
+.button-section > button:hover{
+    opacity: 0.8;
+    background-color: black;
+    color: white;
+}
+
+
+/*********************************/
+.valid-check{
+    display: none;
+    color: darkred;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: var(--xx-small-font-size);
+}
+.valid-check[active]{
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

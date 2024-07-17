@@ -1,3 +1,14 @@
+@import "public/public.css";
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-container > main{
+    flex: 1;
+}
+
 .home {
     padding: 20px;
     background-color: var(--color-bg-color);
@@ -18,10 +29,10 @@
 }
 
 .menu-icon{
+    margin-top: 150px;
     padding: 20px 20px;
     border: 2px solid black;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
 .menu-icon a{
