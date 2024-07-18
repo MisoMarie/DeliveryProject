@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deliverymate.mapper.StoreMapper">
+
+
+    <select id="get_store_info" resultType="com.deliverymate.domain.StoreDTO">
+        SELECT *
+        FROM `store`
+        <where>
+            <if test="storeImg != null">
+                store_Image = #{storeImage}
+            </if>
+            <if test="storeName != null">
+                store_name = #{storeName}
+            </if>
+            <if test="deliveryTime != null">
+                AND delivery_time = #{deliveryTime}
+            </if>
+            <if test="deliveryTip != null">
+                AND delivery_tip = #{deliveryTip}
+            </if>
+            <if test="leastPrice != null">
+                AND least_price >= #{leastPrice}
+            </if>
+        </where>
+    </select>
+</mapper>
