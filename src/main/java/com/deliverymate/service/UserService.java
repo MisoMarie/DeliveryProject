@@ -1,5 +1,6 @@
 package com.deliverymate.service;
 
+import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.mapper.UserMapper;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +20,11 @@ public class UserService {
         userMapper.insert_user(userDTO);
         return true;
     }
+
+//    public StoreDTO get_store(StoreDTO storeDTO) {
+//
+//
+//    }
 
 
 }

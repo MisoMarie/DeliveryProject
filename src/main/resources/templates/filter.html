@@ -12,10 +12,10 @@
 </head>
 <body>
     <main class="product-container" layout:fragment="main">
-        <div>
-            <a href="http://localhost:8080/store">
+        <div th:each="stores: ${stores}">
+            <a href="#" >
                 <section class="product-img-container">
-                    <div class="product-img"></div>
+                    <div th:style="|background-image: url('${stores.images[0].imageURL}')|" class="product-img"></div>
                     <button type="button">
                         <i class="fa-solid fa-heart"></i>
                     </button>
@@ -25,43 +25,16 @@
                 </section>
                 <section class="product-info-section">
                     <div class="store-name">
-                        <span>가게이름</span>
+                        <span th:text="${stores.storeName}">가게이름</span>
                         <span><i class="fa-solid fa-star"></i>4.89</span>
                     </div>
-                    <div class="delivery-time ">
+                    <div class="delivery-time " th:text="|${stores.deliveryTime}분|">
                         배달시간
                     </div>
 
-                    <div class="delivery-coast">배달팁</div>
+                    <div class="delivery-coast" th:text="|${#numbers.formatInteger(stores.deliveryTip,3,'COMMA')}원|">배달팁</div>
                     <div class="delivery-min">
-                        <span>&#8361;최소금액</span>
-                    </div>
-                </section>
-            </a>
-        </div>
-        <div>
-            <a href="#">
-                <section class="product-img-container">
-                    <div class="product-img"></div>
-                    <button type="button">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                    <button>
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </section>
-                <section class="product-info-section">
-                    <div class="store-name">
-                        <span>가게이름</span>
-                        <span><i class="fa-solid fa-star"></i>4.89</span>
-                    </div>
-                    <div class="delivery-time ">
-                        배달시간
-                    </div>
-
-                    <div class="delivery-coast">배달팁</div>
-                    <div class="delivery-min">
-                        <span>&#8361;최소금액</span>
+                        <span th:text="|${#numbers.formatInteger(stores.leastPrice,3,'COMMA')}원|">&#8361;최소금액</span>
                     </div>
                 </section>
             </a>

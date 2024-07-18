@@ -21,7 +21,7 @@ public class ImageDTO {
     public void setFile(MultipartFile file) {
         this.file = file;
         try {
-            if(Objects.nonNull(file)) {
+            if(Objects.nonNull(file)){
                 this.image = file.getBytes();
             }
         } catch (IOException e) {
@@ -29,9 +29,11 @@ public class ImageDTO {
         }
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-        String url = Base64.getEncoder().encodeToString(this.image);
-        this.imageURL = ("data:image/*;base64, " + url);
+    public String getImageURL() {
+        if(imageURL == null) {
+            String url = Base64.getEncoder().encodeToString(this.image);
+            this.imageURL = ("data:image/*;base64, " + url);
+        }
+        return this.imageURL;
     }
 }
