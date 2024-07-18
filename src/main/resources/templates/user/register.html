@@ -1,133 +1,108 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      layout:decorate="~{public/layout}"
->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{public/layout}">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
     <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/register.js}" defer></script>
 </head>
 <body>
-    <main layout:fragment="main" class="register">
-        <section class="register-section">
-            <h1>회원가입</h1>
-            <form method="POST" enctype="multipart/form-data">
-<!--                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
-                <h3>필수정보</h3>
-                <section class="form-section">
-                    <label>
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" name="id" id="id" placeholder="아이디 (4-8글자)">
-                    </label>
-                    <button id="id-duplication-btn" type="button">중복확인</button>
-                </section>
-                <div class="valid-check id">
-                    아이디는 4-8 글자 내여야 합니다
-                </div>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password" id="pw" placeholder="비밀번호 (4-10글자, 영문자 및 숫자, 특수문자 포함)">
-                        <button class="pw-view-btn" type="button"><i class="fa-solid fa-eye"></i></button>
-                    </label>
-                </section>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="pw-re" placeholder="비밀번호 재입력">
-                        <button class="pw-view-btn" type="button"><i class="fa-solid fa-eye"></i></button>
-                    </label>
-                </section>
-                <div class="valid-check pw">
-                    4-10글자, 영문자 및 숫자, 특수문자 포함
-                </div>
-
-                <section class="form-section">
-                    <label class="phone-select">
-                        <select>
-                            <option selected disabled>통신사선택</option>
-                            <option>KT</option>
-                            <option>SKT</option>
-                            <option>LG</option>
-                        </select>
-                    </label>
-                    <label class="phone-select">
-                        <select id="phone-head">
-                            <option selected>010</option>
-                            <option>011</option>
-                            <option>018</option>
-                            <option>019</option>
-                        </select>
-                    </label>
-                    <label>
-                        <input type="tel" id="phone-body" minlength="7" maxlength="8" placeholder="입력 예) 55551234">
-                        <input type="hidden" id="phone" name="phone">
-                    </label>
-                </section>
-
-                <section class="form-section phone-cert-section">
-                    <input id="cert-value" type="hidden" name="impUid">
-                    <button id="cert-btn" type="button">인증하기</button>
-                </section>
-                <div th:active="${certError}" class="valid-check">
-                    휴대폰 인증이 완료되지 않았습니다
-                </div>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="email-head" placeholder="이메일 주소">
-                        <input type="hidden" id="email" name="email">
-                    </label>
-                    <label class="email-select">
-                        <select id="email-body">
-                            <option selected>직접입력</option>
-                            <option>naver.com</option>
-                            <option>google.com</option>
-                            <option>nate.com</option>
-                        </select>
-                    </label>
-                </section>
-                <div class="valid-check email">
-                    유효한 이메일 주소를 작성하세요
-                </div>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-regular fa-user"></i>
-                        <input type="text" name="name" placeholder="이름">
-                    </label>
-                </section>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-regular fa-user"></i>
-                        <input type="file" name="image.file">
-                    </label>
-                </section>
-
-                <section class="form-section">
-                    <label>
-                        <i class="fa-solid fa-signature"></i>
-                        <input type="text" name="nickName" placeholder="닉네임">
-                    </label>
-                </section>
-
-                <section class="button-section">
-                    <button type="button" id="register-btn">회원가입</button>
-                    <button type="button" id="cancel-btn">취소</button>
-                </section>
-
-
-
-
-            </form>
-        </section>
-    </main>
+<main layout:fragment="main" class="register">
+    <section class="register-section">
+        <h1>회원가입</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <h3>필수정보</h3>
+            <section class="form-section">
+                <label>
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="id" id="id" placeholder="아이디 (4-8글자)">
+                </label>
+                <button id="id-duplication-btn" type="button">중복확인</button>
+            </section>
+            <div class="valid-check id">
+                아이디는 4-8 글자 내여야 합니다
+            </div>
+            <section class="form-section">
+                <label>
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" id="pw" placeholder="비밀번호 (4-10글자, 영문자 및 숫자, 특수문자 포함)">
+                    <button class="pw-view-btn" type="button"><i class="fa-solid fa-eye"></i></button>
+                </label>
+            </section>
+            <div class="valid-check pw">
+                4-10글자, 영문자 및 숫자, 특수문자 포함
+            </div>
+            <section class="form-section">
+                <label class="phone-select">
+                    <select>
+                        <option selected disabled>통신사선택</option>
+                        <option>KT</option>
+                        <option>SKT</option>
+                        <option>LG</option>
+                    </select>
+                </label>
+                <label class="phone-select">
+                    <select id="phone-head">
+                        <option selected>010</option>
+                        <option>011</option>
+                        <option>018</option>
+                        <option>019</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="tel" id="phone-body" minlength="7" maxlength="8" placeholder="입력 예) 55551234">
+                    <input type="hidden" id="phone" name="phone">
+                </label>
+            </section>
+            <section class="form-section phone-cert-section">
+                <input id="cert-value" type="hidden" name="impUid">
+                <button id="cert-btn" type="button">인증하기</button>
+            </section>
+            <div th:active="${certError}" class="valid-check">
+                휴대폰 인증이 완료되지 않았습니다
+            </div>
+            <section class="form-section">
+                <label>
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="email-head" placeholder="이메일 주소">
+                    <input type="hidden" id="email" name="email">
+                </label>
+                <label class="email-select">
+                    <select id="email-body">
+                        <option selected>직접입력</option>
+                        <option>naver.com</option>
+                        <option>google.com</option>
+                        <option>nate.com</option>
+                    </select>
+                </label>
+            </section>
+            <div class="valid-check email">
+                유효한 이메일 주소를 작성하세요
+            </div>
+            <section class="form-section">
+                <label>
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="name" id="name" placeholder="이름">
+                </label>
+            </section>
+            <section class="form-section">
+                <label>
+                    <i class="fa-regular fa-user"></i>
+                    <input type="file" name="image.file">
+                </label>
+            </section>
+            <section class="form-section">
+                <label>
+                    <i class="fa-solid fa-signature"></i>
+                    <input type="text" name="nickname" placeholder="닉네임">
+                </label>
+            </section>
+            <section class="button-section">
+                <button type="button" id="register-btn">회원가입</button>
+                <button type="button" id="cancel-btn">취소</button>
+            </section>
+        </form>
+    </section>
+</main>
 </body>
 </html>
