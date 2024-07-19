@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(
-             UserDTO user
+            UserDTO user
 //          ,BindingResult bindingResult
 //            @RequestParam("id") String id,
 //            @RequestParam("password") String password,

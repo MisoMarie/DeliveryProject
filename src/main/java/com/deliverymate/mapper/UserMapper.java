@@ -12,4 +12,6 @@ public interface UserMapper {
 
     //int
     int checkUserIdExists(String id);
+
+    UserDTO select_user_by_userInfo(UserDTO userDTO);
 }

@@ -11,6 +11,7 @@
     <section class="register-section">
         <h1>회원가입</h1>
         <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <h3>필수정보</h3>
             <section class="form-section">
                 <label>
