@@ -19,5 +19,6 @@ public class StoreDTO {
     private String deliveryTip;
     private String foodFilter;
     private List<FoodDTO> foods;
+    private ImageDTO storeImg;
 
 }
