@@ -11,19 +11,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-@EnableWebSecurity
+@Configuration //
+@EnableWebSecurity // 1.
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
+    @Bean // 2
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
 //                .csrf().disable()
 //                .addFilterAfter(new SecurityFilter(), CsrfFilter.class)
                 .authorizeHttpRequests(conf -> {
                     conf.requestMatchers("/user/mypage").authenticated()
-                            .anyRequest().permitAll();
+                            .anyRequest().permitAll(); // 로그인 해야만 올 수 있는 조건
                 })
                 .formLogin(conf -> {
                     conf.loginPage("/user/login") // 로그인 창의 경로

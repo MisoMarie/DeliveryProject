@@ -50,4 +50,13 @@ public class UserController {
        return "redirect:/user/register";
    }
 
+   @GetMapping("/user/mypage")
+    public String get_user_mypage(){
+
+        return "user/mypage";
+   }
+
+
+
+
 }

@@ -21,15 +21,15 @@
         </div>
         <div class="input-div">
             <input type="text" placeholder="찾아라 주위 맛집!">
-            <button type="button">
+            <button id="button" type="button">
                 <img src="/img/search.png"/>
             </button>
         </div>
         <div class="header-user-section">
-            <a href="http://localhost:8080/user/login">로그인</a>
-            <a href="#">로그아웃</a>
-            <a href="http://localhost:8080/user/register">회원가입</a>
-            <a href="http://localhost:8080/user/mypage">MYPAGE</a>
+            <a sec:authorize="!authenticated" href="http://localhost:8080/user/login">로그인</a>
+            <a sec:authorize="authenticated"  href="#">로그아웃</a>
+            <a sec:authorize="!authenticated" href="http://localhost:8080/user/register">회원가입</a>
+            <a sec:authorize="authenticated" href="http://localhost:8080/user/mypage">MYPAGE</a>
         </div>
     </div>
 </body>

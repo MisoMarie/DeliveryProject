@@ -3,14 +3,21 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deliverymate.mapper.StoreMapper">
 
+    <resultMap id="get_store_info_with_food" type="com.deliverymate.domain.StoreDTO" autoMapping="true">
+        <id property="storeNo" column="store_no" />
+        <association property="storeImg" javaType="com.deliverymate.domain.ImageDTO" autoMapping="true">
+            <id property="image" column="store_img"/>
+        </association>
+        <collection property="foods" ofType="com.deliverymate.domain.FoodDTO" javaType="list" autoMapping="true">
+            <id property="foodId" column="food_id"/>
+        </collection>
+    </resultMap>
 
     <select id="get_store_info" resultType="com.deliverymate.domain.StoreDTO">
-        SELECT *
-        FROM `store`
+        SELECT * FROM `store` S
+            INNER JOIN `food` F
+            ON `S`.`store_no` = F.`food_store_no`
         <where>
-            <if test="storeImg != null">
-                store_Image = #{storeImage}
-            </if>
             <if test="storeName != null">
                 store_name = #{storeName}
             </if>

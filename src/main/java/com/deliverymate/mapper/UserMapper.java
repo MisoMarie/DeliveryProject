@@ -9,5 +9,6 @@ public interface UserMapper {
 
     void insert_user(UserDTO user);
 //    UserDTO select_user_by_userInfo(UserDTO loginUser);
+    UserDTO get_user_info(UserDTO user);
 
 }
