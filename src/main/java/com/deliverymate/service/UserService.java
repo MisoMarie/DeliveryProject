@@ -26,5 +26,10 @@ public class UserService {
 //
 //    }
 
+    public UserDTO get_user_info(UserDTO userDTO) {
+
+        return userMapper.get_user_info(userDTO);
+    }
+
 
 }

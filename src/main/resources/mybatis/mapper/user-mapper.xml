@@ -9,8 +9,11 @@
         VALUES
         (#{id}, #{password}, #{phone}, #{email}, #{name}, #{image.image}, #{nickName})
     </insert>
+    <select id="get_user_info" resultType="UserDTO">
+        
+    </select>
 
-<!--    <select id="select_user_by_userInfo" resultType="UserDTO" resultMap="user_with_image_map">-->
+    <!--    <select id="select_user_by_userInfo" resultType="UserDTO" resultMap="user_with_image_map">-->
 <!--        SELECT * FROM `user`-->
 <!--        <where>-->
 <!--            <if test="id != null">-->
