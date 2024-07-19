@@ -18,8 +18,8 @@
         <section>
             <img src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2024/03/12/1710248677621.png?RS=62x60&CS=60x60" alt="">
             <div class="user-name-container">
-                <span id="name">이름</span>
-                <span id="id">(아이디)</span>
+                <span th:text="@{user.nickName}" id="name">이름</span>
+                <span th:text="@{user.id}" id="id">(아이디)</span>
             </div>
         </section>
     </header>
@@ -32,7 +32,7 @@
             </ul>
         </section>
         <section class="mypage-contents">
-                        <div class="card">
+            <div class="card">
                             <a href="#">
                                 <img src="https://a0.muscache.com/im/pictures/prohost-api/Hosting-597441045473216334/original/b5798511-5427-440d-b6cd-e8ab38cad746.jpeg?im_w=720" alt="">
                             </a>

@@ -17,7 +17,7 @@ public class UserDTO {
     private String phone;
     private String email;
     private String name;
-    private byte[] userImage;
+    private ImageDTO Image;
     private String nickName;
     private List<CartDTO> carts;
 }

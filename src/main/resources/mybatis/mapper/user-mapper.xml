@@ -3,14 +3,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deliverymate.mapper.UserMapper">
 
+    <resultMap id="user_with_image_map" type="UserDTO" autoMapping="true">
+        <id property="id" column="id" />
+        <association property="image">
+            <id property="image" column="image" />
+        </association>
+    </resultMap>
+
+
     <insert id="insert_user">
         INSERT INTO `user`
         (`id`, `password`,`phone`,`email`,`name`,`image`,`nick_name`)
         VALUES
         (#{id}, #{password}, #{phone}, #{email}, #{name}, #{image.image}, #{nickName})
     </insert>
-    <select id="get_user_info" resultType="UserDTO">
-        
+    <select id="get_user_info" resultType="UserDTO" resultMap="user_with_image_map">
+        SELECT * FROM `user`
+
     </select>
 
     <!--    <select id="select_user_by_userInfo" resultType="UserDTO" resultMap="user_with_image_map">-->
