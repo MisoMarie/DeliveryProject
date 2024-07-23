@@ -5,6 +5,7 @@ import com.deliverymate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(
-             UserDTO user
+            UserDTO user
 //          ,BindingResult bindingResult
 //            @RequestParam("id") String id,
 //            @RequestParam("password") String password,
@@ -71,5 +72,43 @@ public class UserController {
     }
 
 
+    @GetMapping("/find")
+    public String getFind() {
+        return "user/find";
+    }
+
+
+    @GetMapping("/reset/password")
+    public String get_reset_password(
+            @RequestParam(required = false) String token,
+            Model model
+    ){
+        if(token == null){
+            return "user/reset_password";
+        }
+
+        Boolean result = userService.check_token_is_valid(token);
+        if(result != null && result){
+            System.out.println(token + " 이 유효함");
+            model.addAttribute("token", token);
+            model.addAttribute("success", true);
+        }
+        System.out.println(token + " 이 유효하지 않음");
+        return "user/reset_password";
+    }
+
+    @PostMapping("/reset/password")
+    public String post_reset_password(
+            @RequestParam String token,
+            @RequestParam String password,
+            Model model
+    ){
+        Boolean result = userService.check_token_is_valid(token);
+        if(result != null && result){
+            userService.user_password_modify(token, password);
+            model.addAttribute("success", true);
+        }
+        return "user/reset_password";
+    }
 
 }

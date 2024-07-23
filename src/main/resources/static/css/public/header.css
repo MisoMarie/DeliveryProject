@@ -51,3 +51,7 @@
     margin-bottom: 5px;
     transition: color 0.3s;
 }
+
+#logout-btn{
+    cursor: pointer;
+}
