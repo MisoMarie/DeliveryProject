@@ -2,6 +2,8 @@ package com.deliverymate.domain;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -12,5 +14,6 @@ public class FoodDTO {
     private String foodName;
     private Integer foodPrice;
     private String foodDescription;
-    private byte[] foodImage;
+    private ImageDTO foodImage;
+    private Integer foodStoreNo;
 }

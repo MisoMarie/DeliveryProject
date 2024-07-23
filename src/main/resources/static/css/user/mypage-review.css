@@ -2,7 +2,7 @@
 @import "../public/public.css";
 
 .user-review-modal{
-    display: none;
+    display: flex;
     /*display: flex;*/
     position: fixed;
     top: 0;
