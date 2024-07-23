@@ -9,7 +9,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString(exclude = {"image", "imageURL", "file", "storeImg", "foodImage"})
+@ToString(exclude = {"image", "imageURL", "file"})
+//@ToString(exclude = {"image", "file"})
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImageDTO {
@@ -17,8 +18,6 @@ public class ImageDTO {
     private MultipartFile file;
     private byte[] image;
     private String imageURL;
-    private String storeImg;
-    private String foodImage;
 
 
     public void setFile(MultipartFile file) {
@@ -38,12 +37,8 @@ public class ImageDTO {
         if (Objects.nonNull(image)) {
             String base64Image = Base64.getEncoder().encodeToString(this.image);
             this.imageURL = "data:image/*;base64," + base64Image;
-            this.storeImg = "data:image/*;base64," + base64Image;
-            this.foodImage = "data:image/*;base64," + base64Image;
         } else {
             this.imageURL = null;
-            this.storeImg = null;
-            this.foodImage = null;
         }
     }
 }

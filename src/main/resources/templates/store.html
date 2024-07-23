@@ -44,48 +44,14 @@
             <p th:text="|${#numbers.formatInteger(store.deliveryTip, 0, 'COMMA')}원|">배달팁: 무료</p>
         </section>
         <form class="store-menu">
-            <div class="menus">
+            <div class="menus" th:each="food : ${store.foods}">
                 <figure>
-                    <img src="/img/mcdonald/bicmac.png" alt="#"/>
+                    <img th:src="${food.foodImage.imageURL}"  alt="#">
                 </figure>
                 <div>
                     <p>빅맥이다</p>
                     <p>참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p>100만원</p>
-                    <select class="number-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-            </div>
-            <div class="menus">
-                <figure>
-                    <img src="https://kfcapi.inicis.com/kfcs_api_img/KFCS/goods/DL_2176697_20240528163012658.png" alt="#"/>
-                </figure>
-                <div>
-                    <p>더블쿼터파운드</p>
-                    <p>더블쿼터파운드임</p>
-                    <p>200만원</p>
-                    <select class="number-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-            </div>
-            <div class="menus">
-                <figure>
-                    <img src="/img/mcdonald/mcspicy.png" alt="#"/>
-                </figure>
-                <div>
-                    <p>맥스파이시</p>
-                    <p>맥스파이시임</p>
-                    <p>50만원</p>
                     <select class="number-select">
                         <option value="1">1</option>
                         <option value="2">2</option>
