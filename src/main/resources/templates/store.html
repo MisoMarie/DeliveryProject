@@ -49,10 +49,11 @@
                     <img th:src="${food.foodImage.imageURL}"  alt="#">
                 </figure>
                 <div>
-                    <p>빅맥이다</p>
-                    <p>참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
-                    <p>100만원</p>
+                    <p th:text="${food.foodName}">빅맥이다</p>
+                    <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
+                    <p th:text="${food.foodPrice}">100만원</p>
                     <select class="number-select">
+                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -63,6 +64,7 @@
             </div>
             <p>총 합계: 100000만원</p>
             <button>주문하기</button>
+            <button type="button" id="cart-btn">카트에 담기</button>
         </form>
         <section class="store-position-section">
             <h3>가게 위치</h3>

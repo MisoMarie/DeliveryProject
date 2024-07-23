@@ -1,5 +1,6 @@
 package com.deliverymate.service;
 
+import com.deliverymate.domain.CartDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -43,6 +46,15 @@ public class UserService {
     public void user_password_modify(String token, String password){
         String encodedPassword = passwordEncoder.encode(password);
         userMapper.update_user_password(token, encodedPassword);
+    }
+
+
+
+
+    /******************** 장바구니 **********************/
+    // 해당 유저의 장바구니 내역 불러오기
+    public List<CartDTO> get_carts(UserDTO user){
+        return userMapper.selectCartsByUserId(user.getId());
     }
 
 }

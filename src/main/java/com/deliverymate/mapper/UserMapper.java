@@ -1,11 +1,13 @@
 package com.deliverymate.mapper;
 
+import com.deliverymate.domain.CartDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import com.deliverymate.domain.UserDTO;  // Ensure you import UserDTO
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -34,4 +36,9 @@ public interface UserMapper {
             @Param("token") String token,
             @Param("password") String password
     );
+
+    List<CartDTO> selectCartsByUserId(String userId);
+
+
+
 }

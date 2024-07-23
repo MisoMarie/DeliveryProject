@@ -21,4 +21,5 @@ public class StoreDTO {
     private String foodFilter;
     private List<FoodDTO> foods;
     private ImageDTO storeImg;
+    private Boolean isWished;
 }

@@ -11,5 +11,6 @@
 
     <typeAliases>
         <typeAlias type="com.deliverymate.domain.UserDTO" alias="UserDTO" />
+        <typeAlias type="com.deliverymate.domain.CartDTO" alias="CartDTO"/>
     </typeAliases>
 </configuration>
