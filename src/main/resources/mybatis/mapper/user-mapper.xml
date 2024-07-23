@@ -20,20 +20,19 @@
     <select id="get_user_info" resultType="UserDTO" resultMap="user_with_image_map">
         SELECT * FROM `user`
 
+    <select id="checkUserIdExists" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM user WHERE id = #{id}
     </select>
 
-    <!--    <select id="select_user_by_userInfo" resultType="UserDTO" resultMap="user_with_image_map">-->
-<!--        SELECT * FROM `user`-->
-<!--        <where>-->
-<!--            <if test="id != null">-->
-<!--                id = #{id}-->
-<!--            </if>-->
-<!--            <if test="email != null">-->
-<!--                AND email = #{email}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
-
-
-
+    <select id="select_user_by_userInfo" resultType="com.deliverymate.domain.UserDTO">
+        SELECT * FROM `user`
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+        </where>
+    </select>
 </mapper>

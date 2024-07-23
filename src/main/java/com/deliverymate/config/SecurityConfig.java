@@ -5,45 +5,39 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration //
-@EnableWebSecurity // 1.
-@EnableMethodSecurity
-public class SecurityConfig {
+@Configuration
+@EnableWebSecurity
 
-    @Bean // 2
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http
-//                .csrf().disable()
-//                .addFilterAfter(new SecurityFilter(), CsrfFilter.class)
-                .authorizeHttpRequests(conf -> {
-                    conf.requestMatchers("/user/mypage").authenticated()
-                            .anyRequest().permitAll(); // 로그인 해야만 올 수 있는 조건
+public class SecurityConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.formLogin(config -> {
+            config.loginPage("/user/login") // 내가 사용하는 로그인 페이지 GET Mapping 경로
+                    .loginProcessingUrl("/user/login")
+                    .usernameParameter("username") // Login html에서 id 적는 input의 name값
+                    .passwordParameter("password") // Login html에서 비밀번호 적는 input의 name값
+                    .defaultSuccessUrl("/main") // Login 성공 시에 이동할 GET Mapping 경로
+                    .permitAll(); // 누구나 접속할수 있도록.
                 })
-                .formLogin(conf -> {
-                    conf.loginPage("/user/login") // 로그인 창의 경로
-                            .loginProcessingUrl("/user/login") // 로그인 창의 action에 적을 로그인 경로
-                            .defaultSuccessUrl("/main") // 로그인 성공 시 이동할 페이지
-                            .permitAll(); // 로그인 페이지는 누구나 올 수 있음
-                })
-                .logout(conf -> {
-                    conf.logoutUrl("/user/logout")
-                            .logoutSuccessUrl("/main")
-                            .clearAuthentication(true)
-                            .invalidateHttpSession(true)
-                            .deleteCookies("JSESSIONID")
+                .logout(config -> {
+                    config.logoutUrl("/user/logout") // logout 하고 싶은 postmapping 경로
+                        .logoutSuccessUrl("/main") // logout 성공 시에 이동할 getmapping 경로
+                            .clearAuthentication(true) // 성공시 인증풀기 (인증객체삭제)
+                            .invalidateHttpSession(true) // 성공 시에 세션삭제
                             .permitAll();
+                })
+                .authorizeRequests(registry ->{
+                    registry.requestMatchers("/user/**").permitAll()
+                            .anyRequest().authenticated();
                 });
-//                http.oauth2Login(conf -> {
-////                    conf.loginPage("/user/login")
-////                            .successHandler(new CustomOAuth2SuccessHandler())
-////                            .permitAll();
-//                });
 
         return http.build();
     }

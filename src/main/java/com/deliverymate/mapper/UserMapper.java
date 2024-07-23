@@ -1,14 +1,17 @@
 package com.deliverymate.mapper;
 
-import com.deliverymate.domain.UserDTO;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-
+import com.deliverymate.domain.UserDTO;  // Ensure you import UserDTO
 
 @Mapper
 public interface UserMapper {
 
-    void insert_user(UserDTO user);
-//    UserDTO select_user_by_userInfo(UserDTO loginUser);
-    UserDTO get_user_info(UserDTO user);
+    void insertUser(UserDTO user);
 
+
+    //int
+    int checkUserIdExists(String id);
+
+    UserDTO select_user_by_userInfo(UserDTO userDTO);
 }
