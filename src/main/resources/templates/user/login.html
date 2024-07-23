@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{public/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main layout:fragment="main" class="login">
+    <section class="login-section">
+        <h1>로그인</h1>
+        <form method="POST" th:action="@{/user/login}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <label class="id-label form-label">
+                <input type="text" name="username"  autocomplete="off">
+            </label>
+            <label class="pw-label form-label">
+                <input type="password" name="password">
+                <i class="fa-solid fa-eye"></i>
+            </label>
+
+            <section>
+                <label class="id-check-label">
+                    <input type="checkbox">
+                    <span>아이디저장</span>
+                </label>
+
+                <a href="/user/find" class="id-pw-find">아이디/비밀번호 찾기</a>
+            </section>
+            <button class="form-btn" id="login-btn">로그인</button>
+        </form>
+
+        <section class="social-login-section">
+            <a th:href="@{/oauth2/authorization/naver}" class="naver-login">
+                <img th:src="@{/img/icon/naver.png}" alt="#">
+                <span>네이버로<br>로그인하기</span>
+            </a>
+            <a th:href="@{/oauth2/authorization/kakao}"class="kakao-login">
+                <img th:src="@{/img/icon/kakao.webp}" alt="#">
+                <span>카카오로<br>로그인하기</span>
+            </a>
+            <a th:href="@{/oauth2/authorization/google}" class="google-login">
+                <img th:src="@{/img/icon/google.png}">
+                <span>구글로<br>로그인하기</span>
+            </a>
+        </section>
+        <hr>
+        <button class="form-btn" id="register-btn" onclick="location.href='/user/register';">회원가입</button>
+    </section>
+</main>
+</body>
+</html>

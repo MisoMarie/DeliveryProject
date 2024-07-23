@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deliverymate.mapper.FilterMapper">
+
+    <select id="select_filter_by_store" resultMap="StoreResultMap">
+        SELECT *
+        FROM store
+        WHERE category = #{category}
+    </select>
+
+    <select id="select_storeNo_by_store" resultMap="StoreResultMap">
+        SELECT
+            *
+        FROM
+            store s
+                LEFT JOIN
+            food f
+            ON
+                s.store_no = f.food_store_no
+        WHERE
+            s.store_no = #{storeNo}
+    </select>
+
+    <!-- ResultMap for ImageDTO -->
+    <resultMap id="ImageDTOResultMap" type="com.deliverymate.domain.ImageDTO">
+        <id property="no" column="store_no"/>
+        <result property="image" column="image_data"/>
+    </resultMap>
+
+    <!-- ResultMap for StoreDTO -->
+    <resultMap id="StoreResultMap" type="com.deliverymate.domain.StoreDTO" autoMapping="true">
+        <id property="storeNo" column="store_no"/>
+
+        <association property="storeImg" javaType="com.deliverymate.domain.ImageDTO">
+            <id property="image" column="store_img" />
+        </association>
+
+        <collection property="foods" ofType="com.deliverymate.domain.FoodDTO" autoMapping="true">
+            <id property="foodId" column="food_id"/>
+            <association property="foodImage" javaType="com.deliverymate.domain.ImageDTO">
+                <id property="image" column="food_image"/>
+            </association>
+        </collection>
+    </resultMap>
+</mapper>
