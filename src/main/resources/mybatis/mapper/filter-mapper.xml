@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deliverymate.mapper.FilterMapper">
+
+    <select id="select_filter_by_store" resultMap="StoreResultMap">
+        SELECT s.*, s.store_img as image_data
+        FROM store s
+        WHERE s.category = #{category}
+    </select>
+
+    <select id="select_storeNo_by_store" resultMap="StoreResultMap">
+        SELECT
+            s.store_no,
+            s.store_name,
+            s.least_price,
+            s.payment_option,
+            s.delivery_time,
+            s.delivery_tip,
+            s.category,
+            s.food_filter,
+            s.store_img as image_data,
+            f.food_id,
+            f.food_name,
+            f.food_price,
+            f.food_description,
+            f.food_image
+        FROM
+            store s
+                LEFT JOIN
+            food f
+            ON
+                s.store_no = f.food_store_no
+        WHERE
+            s.store_no = #{storeNo}
+    </select>
+
+    <!-- ResultMap for ImageDTO -->
+    <resultMap id="ImageDTOResultMap" type="com.deliverymate.domain.ImageDTO">
+        <id property="no" column="store_no"/>
+        <result property="image" column="image_data"/>
+    </resultMap>
+
+    <!-- ResultMap for StoreDTO -->
+    <resultMap id="StoreResultMap" type="com.deliverymate.domain.StoreDTO">
+        <id property="storeNo" column="store_no"/>
+        <result property="storeName" column="store_name"/>
+        <result property="leastPrice" column="least_price"/>
+        <result property="paymentOption" column="payment_option"/>
+        <result property="deliveryTime" column="delivery_time"/>
+        <result property="deliveryTip" column="delivery_tip"/>
+        <result property="category" column="category"/>
+        <result property="foodFilter" column="food_filter"/>
+        <association property="storeImg" javaType="com.deliverymate.domain.ImageDTO" resultMap="ImageDTOResultMap"/>
+
+        <collection property="foods" ofType="com.deliverymate.domain.FoodDTO">
+            <id property="foodId" column="food_id"/>
+            <result property="foodName" column="food_name"/>
+            <result property="foodPrice" column="food_price"/>
+            <result property="foodDescription" column="food_description"/>
+            <result property="foodStoreNo" column="store_no"/>
+            <association property="foodImage" javaType="com.deliverymate.domain.ImageDTO" resultMap="ImageDTOResultMap">
+                <result property="image" column="food_image"/>
+            </association>
+        </collection>
+    </resultMap>
+</mapper>
