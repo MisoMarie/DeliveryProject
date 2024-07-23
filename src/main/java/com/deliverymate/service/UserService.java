@@ -1,5 +1,6 @@
 package com.deliverymate.service;
 
+import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -45,4 +48,18 @@ public class UserService {
         userMapper.update_user_password(token, encodedPassword);
     }
 
+<<<<<<< Updated upstream
+=======
+
+    /*********************** wishlist **************************/
+    public List<StoreDTO> get_user_wishlist_with_stores(String id){
+        return userMapper.select_wishlist_of_user(id);
+    }
+    public void add_user_wishlist(String userId, Integer storeNo){
+        userMapper.insert_wishlist(userId, storeNo);
+    }
+    public void remove_user_wishlist(String userId, Integer storeNo){
+        userMapper.delete_wishlist(userId, storeNo);
+    }
+>>>>>>> Stashed changes
 }

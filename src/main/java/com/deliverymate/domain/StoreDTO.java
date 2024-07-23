@@ -21,4 +21,8 @@ public class StoreDTO {
     private String foodFilter;
     private List<FoodDTO> foods;
     private ImageDTO storeImg;
+<<<<<<< Updated upstream
+=======
+    private Boolean isWished;
+>>>>>>> Stashed changes
 }

@@ -42,4 +42,28 @@
         WHERE `pw_reset_token` = #{token}
     </update>
 
+<<<<<<< Updated upstream
+=======
+    <!--**********************************************************-->
+    <select id="select_wishlist_of_user">
+        SELECT
+            Store.*,
+            Store.no AS 'store_no',
+        FROM `wishlist` WISH
+                 INNER JOIN `store` STORE
+                            ON STORE.`store_no` = WISH.`store_no`
+        WHERE WISH.`user_id` = #{id}
+    </select>
+
+    <insert id="insert_wishlist">
+        INSERT IGNORE INTO `wishlist` VALUES
+        (#{storeNo}, #{userId})
+    </insert>
+
+    <delete id="delete_wishlist">
+        DELETE FROM `wishlist` WHERE
+            `user_id` = #{userId} AND `store_no` = #{storeNo}
+    </delete>
+
+>>>>>>> Stashed changes
 </mapper>

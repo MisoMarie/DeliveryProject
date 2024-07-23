@@ -26,19 +26,36 @@ public class MainController {
     @GetMapping("/filter/{category}")
     public String get_filter(
             @PathVariable("category") String category,
+<<<<<<< Updated upstream
             Model model
     ) {
         List<StoreDTO> store = mainService.get_filter(category);
+=======
+            @AuthenticationPrincipal UserDTO userDTO,
+            Model model
+    ) {
+        List<StoreDTO> store = mainService.get_filter(category,userDTO);
+>>>>>>> Stashed changes
         model.addAttribute("store", store);
         return "filter";
     }
 
+<<<<<<< Updated upstream
     @GetMapping("/store/{storeNo}")
     public String get_store(
             @PathVariable("storeNo") Integer storeNo,
             Model model
     ) {
         StoreDTO store = mainService.get_store(storeNo);
+=======
+    @GetMapping("/filter/store/{storeNo}")
+    public String get_store(
+            @AuthenticationPrincipal UserDTO userDTO,
+            @PathVariable("storeNo") Integer storeNo,
+            Model model
+    ) {
+        StoreDTO store = mainService.get_store(storeNo, userDTO);
+>>>>>>> Stashed changes
         model.addAttribute("store", store);
         System.out.println(store);
         return "store";

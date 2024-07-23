@@ -1,11 +1,16 @@
 package com.deliverymate.mapper;
 
+import com.deliverymate.domain.StoreDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import com.deliverymate.domain.UserDTO;  // Ensure you import UserDTO
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
+<<<<<<< Updated upstream
+=======
+import java.util.List;
+>>>>>>> Stashed changes
 
 @Mapper
 public interface UserMapper {
@@ -34,4 +39,18 @@ public interface UserMapper {
             @Param("token") String token,
             @Param("password") String password
     );
+<<<<<<< Updated upstream
+=======
+
+    /****************** wishlist ********************/
+    List<StoreDTO> select_wishlist_of_user(String id);
+    void insert_wishlist(
+            @Param("userId") String userId,
+            @Param("storeNo") Integer storeNo
+    );
+    void delete_wishlist(
+            @Param("userId") String userId,
+            @Param("storeNo") Integer storeNo
+    );
+>>>>>>> Stashed changes
 }
