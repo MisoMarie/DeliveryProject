@@ -1,6 +1,7 @@
 package com.deliverymate.mapper;
 
 import com.deliverymate.domain.CartDTO;
+import com.deliverymate.domain.StoreDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import com.deliverymate.domain.UserDTO;  // Ensure you import UserDTO
@@ -39,6 +40,14 @@ public interface UserMapper {
 
     List<CartDTO> selectCartsByUserId(String userId);
 
-
-
+    /****************** wishlist ********************/
+    List<StoreDTO> select_wishlist_of_user(String id);
+    void insert_wishlist(
+            @Param("userId") String userId,
+            @Param("storeNo") Integer storeNo
+    );
+    void delete_wishlist(
+            @Param("userId") String userId,
+            @Param("storeNo") Integer storeNo
+    );
 }

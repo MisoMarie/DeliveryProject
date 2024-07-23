@@ -1,6 +1,10 @@
 package com.deliverymate.controller;
 
 
+<<<<<<< Updated upstream
+=======
+import com.deliverymate.domain.StoreDTO;
+>>>>>>> Stashed changes
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.service.UserEmailService;
 import com.deliverymate.service.UserService;
@@ -43,4 +47,38 @@ public class UserRestController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버에 문제가 발생했습니다. 나중에 다시 시도해주세요");
     }
+<<<<<<< Updated upstream
+=======
+
+    /****************** wishlist **********************/
+    @GetMapping("/wishlist")
+    public ResponseEntity<List<StoreDTO>> get_user_wishlists(
+            @AuthenticationPrincipal UserDTO userDTO
+    ){
+        // 유저가 좋아요 한 방 정보들을 전부 가져온다
+        List<StoreDTO> stores = userService.get_user_wishlist_with_stores(userDTO.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(stores);
+    }
+
+    @PostMapping("/wishlist/{storeNo}")
+    public ResponseEntity<Void> post_user_wishlist(
+            @AuthenticationPrincipal UserDTO userDTO,
+            @PathVariable("storeNo") Integer storeNo
+    ){
+        userService.add_user_wishlist(userDTO.getId(), storeNo);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(null);
+    }
+
+    @DeleteMapping("/wishlist/{storeNo}")
+    public ResponseEntity<Void> delete_user_wishlist(
+            @AuthenticationPrincipal UserDTO userDTO,
+            @PathVariable("storeNo") Integer storeNo
+    ){
+        userService.remove_user_wishlist(userDTO.getId(), storeNo);
+        return ResponseEntity.ok().body(null);
+    }
+
+>>>>>>> Stashed changes
 }

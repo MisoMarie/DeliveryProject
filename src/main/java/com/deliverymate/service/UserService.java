@@ -1,5 +1,6 @@
 package com.deliverymate.service;
 
+import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.CartDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.mapper.UserMapper;
@@ -49,12 +50,21 @@ public class UserService {
     }
 
 
-
-
     /******************** 장바구니 **********************/
     // 해당 유저의 장바구니 내역 불러오기
     public List<CartDTO> get_carts(UserDTO user){
         return userMapper.selectCartsByUserId(user.getId());
+    }
+
+    /*********************** wishlist **************************/
+    public List<StoreDTO> get_user_wishlist_with_stores(String id){
+        return userMapper.select_wishlist_of_user(id);
+    }
+    public void add_user_wishlist(String userId, Integer storeNo){
+        userMapper.insert_wishlist(userId, storeNo);
+    }
+    public void remove_user_wishlist(String userId, Integer storeNo){
+        userMapper.delete_wishlist(userId, storeNo);
     }
 
 }

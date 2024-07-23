@@ -7,10 +7,14 @@
 >
 <head>
     <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <title>Store</title>
     <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e02c96b7b84824c8d284897a19a83&libraries=services,clusterer,drawing"></script>
     <script th:src="@{/js/store.js}" defer></script>
+<<<<<<< Updated upstream
+=======
+    <script th:src="@{/js/wishlist.js}" defer></script>
 </head>
 <body>
     <main layout:fragment="main" class="store">
@@ -23,11 +27,13 @@
         <section class="store-head">
             <h1 id="store-name"  th:text="${store.storeName}">가게이름 어쩌구 저쩌구</h1>
             <div class="btn-container">
-                <button class="save-btn" type="button">
+=======
+                <button class="save-btn" type="button" th:if="${store.isWished}" th:onclick="|remove_wishlist(${store.storeNo}, this)|">
                     <i class="fa-solid fa-heart"></i>
                     <span>좋아요 취소</span>
                 </button>
-                <button class="save-btn" type="button">
+                <button class="save-btn" type="button" th:unless="${store.isWished}" th:onclick="|add_wishlist(${store.storeNo}, this)|">
+>>>>>>> Stashed changes
                     <i class="fa-regular fa-heart"></i>
                     <span>좋아요</span>
                 </button>
@@ -49,11 +55,18 @@
                     <img th:src="${food.foodImage.imageURL}"  alt="#">
                 </figure>
                 <div>
+<<<<<<< Updated upstream
+                    <p>빅맥이다</p>
+                    <p>참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
+                    <p>100만원</p>
+                    <select class="number-select">
+=======
                     <p th:text="${food.foodName}">빅맥이다</p>
                     <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p th:text="${food.foodPrice}">100만원</p>
                     <select class="number-select">
                         <option value="0">0</option>
+>>>>>>> Stashed changes
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

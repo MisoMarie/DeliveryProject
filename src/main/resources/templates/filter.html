@@ -6,6 +6,7 @@
       layout:decorate="~{public/layout}"
 >
 <head>
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <meta charset="UTF-8">
     <title>Filter</title>
     <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
@@ -13,7 +14,11 @@
 <body>
     <main class="product-container" layout:fragment="main">
         <div th:each="s: ${store}">
+<<<<<<< Updated upstream
             <a th:href="@{'http://localhost:8080/store/' + ${s.storeNo}}">
+=======
+            <a th:href="@{|store/${s.storeNo}|}">
+>>>>>>> Stashed changes
                 <section class="product-img-container">
                     <div class="product-img" th:style="|background-image: url('${s.storeImg.imageURL}')|"></div>
                     <button type="button">
