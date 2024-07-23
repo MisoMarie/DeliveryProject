@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 완료 안내</title>
+
+</head>
+<style>
+
+</style>
+    <body>
+    <main style="
+            width: 800px;
+            min-width: 500px;
+            margin: 0 auto;
+            padding: 20px 0;
+            border: 1px solid black;
+            border-radius: 4px;
+        ">
+        <h1 th:text="${title}" style="
+                text-align: center;
+                font-size: 27px;
+                color: #A68F97FF;
+            ">음식 주문이 완료되었습니다!</h1>
+
+        <section style="
+                padding: 30px 80px;
+            ">
+            <a th:href="'#' + ${roomNo}"
+               style="
+               display: flex;
+               justify-content: center;
+                    align-items: center;
+                        overflow: hidden;"
+            >
+                <img th:src="${roomImg}"
+                     style="
+                     width: 250px;
+                     display: flex;
+                     justify-content: center;
+                     align-content: center;"
+                     src="https://a0.muscache.com/im/pictures/miso/Hosting-731656101110534003/original/cc127ddb-9c40-45e7-a33b-fcd652f50da2.jpeg?im_w=1200&im_q=highq" alt="#">
+            </a>
+            <div style="
+                    display: block;
+                 ">
+                <h3 th:text="${subTitle}" style="
+                        text-align: center;
+                        align-items: center;
+                    ">음식 이름:</h3>
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px 0;
+                    ">
+                    <b style="
+                            width: 120px;
+                            color: #004F4DFF"
+                    >음식 분류:</b>
+                    <span style="color: #79717AFF" th:text="${totalPrice}">12335135315351</span>
+                </div>
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px 0;
+                    ">
+                    <b style="
+                            width: 120px;
+                            color: #004F4DFF"
+                    >주문한 매장:</b>
+                    <span  style="color: #79717AFF" th:text="${startDate} + '~' + ${endDate}">12335135315351</span>
+                </div>
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px 0;
+                    ">
+                    <b style="
+                            width: 120px;
+                            color: #004F4DFF"
+                    >결제 수단:</b>
+                    <span  style="color: #79717AFF" th:text="${reservationDatetime}">12335135315351</span>
+                </div>
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px 0;
+                    ">
+                    <b style="
+                            width: 120px;
+                            color: #004F4DFF"
+                    >음식 주문 가격:</b>
+                    <span  style="color: #79717AFF" th:text="${price}">12335135315351</span>
+                </div>
+                <div style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px 0;
+                    ">
+                    <b style="
+                            width: 120px;
+                            color: #004F4DFF"
+                    >총 결제 금액:</b>
+                    <span style="color: #79717AFF" th:text="${totalPrice}">12335135315351</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    </body>
+</html>
