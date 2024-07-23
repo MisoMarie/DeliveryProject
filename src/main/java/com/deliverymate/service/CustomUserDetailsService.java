@@ -35,6 +35,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(Objects.isNull(findUser)){
             throw new UsernameNotFoundException("USER가 존재하지 않습니다");
         }
+
+
+
+        System.out.println("로그인 성공! 유저 정보: " + findUser);
+
         // 유저가 있으면 유저 반환 == 로그인 성공!
         return findUser;
     }

@@ -3,11 +3,13 @@ package com.deliverymate.domain;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import jdk.jshell.Snippet;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.List;
 
@@ -17,7 +19,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements UserDetails {
+
+public class UserDTO implements UserDetails, OAuth2User {
     private String id;
     private String password;
     private String phone;
@@ -27,7 +30,10 @@ public class UserDTO implements UserDetails {
     private String nickname;
     private List<CartDTO> carts;
 
-
+    @Override
+    public Map<String, Object> getAttributes() {
+        return Map.of();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

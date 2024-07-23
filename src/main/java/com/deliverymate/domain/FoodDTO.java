@@ -12,5 +12,6 @@ public class FoodDTO {
     private String foodName;
     private Integer foodPrice;
     private String foodDescription;
-    private byte[] foodImage;
+    private ImageDTO foodImage;
+    private Integer foodStoreNo;
 }

@@ -2,33 +2,24 @@ package com.deliverymate.controller;
 
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.service.UserService;
-import org.apache.ibatis.annotations.Param;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
     @GetMapping("/register")
     public String getRegister() {
-
         return "user/register";
     }
 
@@ -40,7 +31,7 @@ public class UserController {
     @GetMapping("/mypage")
     public String getMypage() {
         return "user/mypage";
-   }
+    }
 
     @PostMapping("/register")
     public String registerUser(
@@ -72,22 +63,6 @@ public class UserController {
             return "register";
         }
     }
-   @PostMapping("/register")
-    public String post_user_register(
-            UserDTO userDTO,
-            RedirectAttributes redirectAttributes
-   ){
-       System.out.println(userDTO);
-       boolean result = userService.user_register(userDTO);
-
-       // 회원가입 완료, 문제 없음.
-       if(result){
-           return "redirect:/user/login";
-       }
-       redirectAttributes.addFlashAttribute("certError", true);
-       System.out.println("post_user_register 회원가입 시도 : " + userDTO);
-       return "redirect:/user/register";
-   }
 
     // id db에서 있나없나 확인하는 용도
     @GetMapping("/checkId")
@@ -95,4 +70,45 @@ public class UserController {
         boolean exists = userService.isUserIdExists(id);
         return ResponseEntity.ok(exists);
     }
+
+
+    @GetMapping("/find")
+    public String getFind() {
+        return "user/find";
+    }
+
+
+    @GetMapping("/reset/password")
+    public String get_reset_password(
+            @RequestParam(required = false) String token,
+            Model model
+    ){
+        if(token == null){
+            return "user/reset_password";
+        }
+
+        Boolean result = userService.check_token_is_valid(token);
+        if(result != null && result){
+            System.out.println(token + " 이 유효함");
+            model.addAttribute("token", token);
+            model.addAttribute("success", true);
+        }
+        System.out.println(token + " 이 유효하지 않음");
+        return "user/reset_password";
+    }
+
+    @PostMapping("/reset/password")
+    public String post_reset_password(
+            @RequestParam String token,
+            @RequestParam String password,
+            Model model
+    ){
+        Boolean result = userService.check_token_is_valid(token);
+        if(result != null && result){
+            userService.user_password_modify(token, password);
+            model.addAttribute("success", true);
+        }
+        return "user/reset_password";
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.deliverymate.service;
 
-import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class UserService {
@@ -34,16 +30,19 @@ public class UserService {
         userMapper.insertUser(userDTO);
     }
 
-//    public StoreDTO get_store(StoreDTO storeDTO) {
-//
-//
-//    }
-
-    public UserDTO get_user_info(UserDTO userDTO) {
-
-        return userMapper.get_user_info(userDTO);
+    public boolean isUserIdExists(String id) {
+        return userMapper.checkUserIdExists(id) > 0;
     }
 
-
+    /*********************** 비밀번호 재설정 **************************/
+    // 토큰 체크하는것
+    public Boolean check_token_is_valid(String token){
+        return userMapper.select_user_token_with_expiredate(token);
+    }
+    // 비밀번호 수정
+    public void user_password_modify(String token, String password){
+        String encodedPassword = passwordEncoder.encode(password);
+        userMapper.update_user_password(token, encodedPassword);
+    }
 
 }

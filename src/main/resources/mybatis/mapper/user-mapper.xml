@@ -35,4 +35,25 @@
             </if>
         </where>
     </select>
+    <!--***************************패스워드관련*******************************-->
+    <select id="select_user_token_with_expiredate">
+        SELECT NOT ISNULL(`id`) FROM `user` WHERE
+            `pw_reset_token` = #{token} AND `pw_reset_token_expire_date` >= now();
+    </select>
+
+    <update id="update_user_pw_token">
+        UPDATE `user` SET
+                          `pw_reset_token` = #{token},
+                          `pw_reset_token_expire_date` = #{expireDate}
+        WHERE `id` = #{id}
+    </update>
+
+    <update id="update_user_password">
+        UPDATE `user` SET
+                          `pw_reset_token` = NULL,
+                          `pw_reset_token_expire_date` = NULL,
+                          `password` = #{password}
+        WHERE `pw_reset_token` = #{token}
+    </update>
+
 </mapper>

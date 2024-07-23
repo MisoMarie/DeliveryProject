@@ -52,8 +52,6 @@
     transition: color 0.3s;
 }
 
-#button img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#logout-btn{
+    cursor: pointer;
 }
