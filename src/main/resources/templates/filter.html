@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <title>Filter</title>
     <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/wishlist.js}" defer></script>
 </head>
 <body>
     <main class="product-container" layout:fragment="main">
@@ -19,10 +20,14 @@
                     <div class="product-img"
                          th:style="|background-image: url('${s.storeImg != null && s.storeImg.imageURL != null ? s.storeImg.imageURL : '../img/mcdonald/mcdonald.jpg'}')|">
                     </div>
+<<<<<<< Updated upstream
                     <button type="button">
+=======
+                    <button th:if="${s.isWished}" type="button" th:onclick="|remove_wishlist(${s.storeNo}, this, event)|">
+>>>>>>> Stashed changes
                         <i class="fa-solid fa-heart"></i>
                     </button>
-                    <button>
+                    <button th:unless="${s.isWished}" type="button" th:onclick="|add_wishlist(${s.storeNo}, this, event)|">
                         <i class="fa-regular fa-heart"></i>
                     </button>
                 </section>
