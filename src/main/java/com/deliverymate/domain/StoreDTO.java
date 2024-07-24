@@ -1,8 +1,8 @@
 package com.deliverymate.domain;
 
-
 import lombok.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @Getter
@@ -17,7 +17,10 @@ public class StoreDTO {
     private String paymentOption;
     private String deliveryTime;
     private String deliveryTip;
+    private String category;
     private String foodFilter;
     private List<FoodDTO> foods;
-
+    private ImageDTO storeImg;
+    private Boolean isWished;
+    private List<ReviewDTO> reviews;
 }

@@ -9,4 +9,94 @@
     <select id="checkUserIdExists" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM user WHERE id = #{id}
     </select>
+
+    <select id="select_user_by_userInfo" resultType="com.deliverymate.domain.UserDTO">
+        SELECT * FROM `user`
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+        </where>
+    </select>
+    <!--***************************패스워드관련*******************************-->
+    <select id="select_user_token_with_expiredate">
+        SELECT NOT ISNULL(`id`) FROM `user` WHERE
+            `pw_reset_token` = #{token} AND `pw_reset_token_expire_date` >= now();
+    </select>
+
+    <update id="update_user_pw_token">
+        UPDATE `user` SET
+                          `pw_reset_token` = #{token},
+                          `pw_reset_token_expire_date` = #{expireDate}
+        WHERE `id` = #{id}
+    </update>
+
+    <update id="update_user_password">
+        UPDATE `user` SET
+                          `pw_reset_token` = NULL,
+                          `pw_reset_token_expire_date` = NULL,
+                          `password` = #{password}
+        WHERE `pw_reset_token` = #{token}
+    </update>
+
+    <!--**********************************************************-->
+    <select id="select_wishlist_of_user" resultMap="com.deliverymate.mapper.FilterMapper.StoreResultMap">
+        SELECT
+            STORE.*,
+            STORE.store_no AS 'store_no',
+            TRUE AS 'is_wished'
+        FROM `wishlist` WISH
+                INNER JOIN `store` STORE
+                ON STORE.store_no = WISH.store_no
+        WHERE WISH.user_id = #{id}
+    </select>
+
+
+    <insert id="insert_wishlist">
+        INSERT IGNORE INTO `wishlist` VALUES
+        (#{storeNo}, #{userId})
+    </insert>
+
+    <delete id="delete_wishlist">
+        DELETE FROM `wishlist` WHERE
+            `user_id` = #{userId} AND `store_no` = #{storeNo}
+    </delete>
+
+    <!--****************************review******************************-->
+
+    <select id="select_store_reviews_by_storeNo" resultMap="select_review_with_user_map">
+        SELECT * FROM `REVIEW` RV
+        INNER JOIN `USER` U
+        ON RV.`user_id` = U.`id`
+        WHERE RV.review_store_no = ${storeNo}
+        <choose>
+            <!-- 평점 낮은 순     -->
+            <when test="order == 'lowest'">
+                ORDER BY `score` ASC
+            </when>
+            <!-- 평점 높은 순     -->
+            <when test="order == 'highest'">
+                ORDER BY `score` DESC
+            </when>
+            <!-- 기본은 최신순. recent           -->
+            <otherwise>
+                ORDER BY RV.`no` DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <resultMap id="select_review_with_user_map" type="com.deliverymate.domain.ReviewDTO" autoMapping="true">
+        <id property="no" column="no" />
+        <association property="user" column="user_id" resultMap="user_with_image_map" />
+    </resultMap>
+
+    <resultMap id="user_with_image_map" type="com.deliverymate.domain.UserDTO" autoMapping="true">
+        <id property="id" column="id" />
+        <association property="image">
+            <id property="image" column="image" />
+        </association>
+    </resultMap>
 </mapper>
