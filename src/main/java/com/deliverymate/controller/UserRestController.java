@@ -1,10 +1,7 @@
 package com.deliverymate.controller;
 
 
-<<<<<<< Updated upstream
-=======
 import com.deliverymate.domain.StoreDTO;
->>>>>>> Stashed changes
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.service.UserEmailService;
 import com.deliverymate.service.UserService;
@@ -47,8 +44,6 @@ public class UserRestController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버에 문제가 발생했습니다. 나중에 다시 시도해주세요");
     }
-<<<<<<< Updated upstream
-=======
 
     /****************** wishlist **********************/
     @GetMapping("/wishlist")
@@ -80,5 +75,4 @@ public class UserRestController {
         return ResponseEntity.ok().body(null);
     }
 
->>>>>>> Stashed changes
 }

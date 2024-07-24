@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deliverymate.mapper.FilterMapper">
 
-<<<<<<< Updated upstream
-    <select id="select_filter_by_store" resultMap="StoreResultMap">
-        SELECT *
-        FROM store
-        WHERE category = #{category}
-=======
+
+<!--    <select id="select_filter_by_store" resultMap="StoreResultMap">-->
+<!--        SELECT *-->
+<!--        FROM store-->
+<!--        WHERE category = #{category}-->
 <!--    <select id="select_filter_by_store" resultMap="StoreResultMap">-->
 <!--        SELECT *-->
 <!--        FROM store-->
@@ -25,30 +24,23 @@
             wishlist w ON s.store_no = w.store_no
         WHERE
             s.category = #{category}
->>>>>>> Stashed changes
     </select>
 
     <select id="select_storeNo_by_store" resultMap="StoreResultMap">
         SELECT
-<<<<<<< Updated upstream
             *
-=======
             *,
             IF(wl.user_id = #{userId}, TRUE, FALSE) AS 'is_wished'
->>>>>>> Stashed changes
         FROM
             store s
                 LEFT JOIN
             food f
-<<<<<<< Updated upstream
             ON
                 s.store_no = f.food_store_no
-=======
             ON s.store_no = f.food_store_no
                 LEFT JOIN
             wishlist wl
             ON wl.store_no = s.store_no AND wl.user_id = #{userId}
->>>>>>> Stashed changes
         WHERE
             s.store_no = #{storeNo}
     </select>
@@ -70,7 +62,7 @@
         <collection property="foods" ofType="com.deliverymate.domain.FoodDTO" autoMapping="true">
             <id property="foodId" column="food_id"/>
             <association property="foodImage" javaType="com.deliverymate.domain.ImageDTO">
-                <id property="image" column="food_image"/>
+                <id property="foodId" column="food_image"/>
             </association>
         </collection>
     </resultMap>

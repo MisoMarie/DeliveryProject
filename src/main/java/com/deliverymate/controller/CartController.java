@@ -25,11 +25,10 @@ public class CartController {
     @Autowired
     private UserService userService;
 
-
     /************************ 장바구니 ********************/
     // 장바구니 화면으로 이동
     @GetMapping("/cart")
-    public void get_user_cart(
+    public String get_user_cart(
             @AuthenticationPrincipal UserDTO user,
             Model model
     ){
@@ -39,6 +38,7 @@ public class CartController {
         }
         log.info(carts);
         model.addAttribute("carts", carts);
+        return "user/cart";
     }
 
 //    // 장바구니에 상품을 추가

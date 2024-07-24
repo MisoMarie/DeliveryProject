@@ -49,16 +49,12 @@ function collect_cart_selected_items(){
         if(checkBoxInput.checked) {
             const productNo = +productContainer.querySelector('.product-no').value;
             const name = productContainer.querySelector('.name').textContent;
-            const color = productContainer.querySelector('.color').textContent;
-            const size = productContainer.querySelector('.size').textContent;
             const amount = +productContainer.querySelector('.amount').textContent.replaceAll('개', '');
             const price = +productContainer.querySelector('.price').textContent.replaceAll(',','').replaceAll('원','');
             items.push({
                 no: +cartNoInput.value,
                 product: { no: productNo, name: name },
                 amount: amount,
-                color: color,
-                size: size,
                 price: price
             });
         }

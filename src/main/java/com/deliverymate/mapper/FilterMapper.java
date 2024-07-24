@@ -10,16 +10,13 @@ import java.util.List;
 @Mapper
 public interface FilterMapper {
 
-<<<<<<< Updated upstream
     List<StoreDTO> select_filter_by_store(@Param("category") String category);
 
 
     StoreDTO select_storeNo_by_store(@Param("storeNo") Integer storeNo);
-=======
     List<StoreDTO> select_filter_by_store(@Param("category") String category, @Param("userId") String userId);
 
 
     StoreDTO select_storeNo_by_store(@Param("storeNo") Integer storeNo, @Param("userId") String userId);
->>>>>>> Stashed changes
 
 }
