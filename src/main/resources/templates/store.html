@@ -12,8 +12,6 @@
     <script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e02c96b7b84824c8d284897a19a83&libraries=services,clusterer,drawing"></script>
     <script th:src="@{/js/store.js}" defer></script>
-<<<<<<< Updated upstream
-=======
     <script th:src="@{/js/wishlist.js}" defer></script>
 </head>
 <body>
@@ -27,13 +25,11 @@
         <section class="store-head">
             <h1 id="store-name"  th:text="${store.storeName}">가게이름 어쩌구 저쩌구</h1>
             <div class="btn-container">
-=======
                 <button class="save-btn" type="button" th:if="${store.isWished}" th:onclick="|remove_wishlist(${store.storeNo}, this)|">
                     <i class="fa-solid fa-heart"></i>
                     <span>좋아요 취소</span>
                 </button>
                 <button class="save-btn" type="button" th:unless="${store.isWished}" th:onclick="|add_wishlist(${store.storeNo}, this)|">
->>>>>>> Stashed changes
                     <i class="fa-regular fa-heart"></i>
                     <span>좋아요</span>
                 </button>
@@ -55,18 +51,11 @@
                     <img th:src="${food.foodImage.imageURL}"  alt="#">
                 </figure>
                 <div>
-<<<<<<< Updated upstream
-                    <p>빅맥이다</p>
-                    <p>참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
-                    <p>100만원</p>
-                    <select class="number-select">
-=======
                     <p th:text="${food.foodName}">빅맥이다</p>
                     <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p th:text="${food.foodPrice}">100만원</p>
                     <select class="number-select">
                         <option value="0">0</option>
->>>>>>> Stashed changes
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -77,7 +66,6 @@
             </div>
             <p>총 합계: 100000만원</p>
             <button>주문하기</button>
-            <button type="button" id="cart-btn">카트에 담기</button>
         </form>
         <section class="store-position-section">
             <h3>가게 위치</h3>
@@ -88,39 +76,39 @@
         </section>
         <section class="review-section">
             <div class="review-section-header">
-                <h3>후기 ???개</h3>
+                <h3>후기 0개</h3>
                 <ul>
                     <li>
-                        <a href="#">최신순</a>
+                        <a onclick="get_reviews('recent')">최신순</a>
                         <span>|</span>
-                        <a href="#" >평점 높은 순</a>
+                        <a onclick="get_reviews('highest')">평점 높은 순</a>
                         <span>|</span>
-                        <a href="#">평점 낮은 순</a>
+                        <a onclick="get_reviews('lowest')">평점 낮은 순</a>
                     </li>
                 </ul>
             </div>
             <article class="review-container">
-                <section class="review">
-                    <div class="reviewer-container">
-                        <img class="reviewer-img" src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2024/03/12/1710248677621.png?RS=62x60&CS=60x60" alt="#">
-                        <span class="reviewer-nickname">Haruuu</span>
-                    </div>
-                    <div class="review-content-container">
-                        <div class="review-header">
-                            <span class="review-score">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star"></i>
-                            </span>
-                            <span class="review-date">2024.04.02</span>
-                        </div>
-                        <div class="review-body">
-                            <p class="review-content">너무너무 맛있어요! 다시 시켜먹구싶어요!</p>
-                        </div>
-                    </div>
-                </section>
-                <section class="review">
-                    <div>현재 작성된 리뷰가 없습니다....</div>
-                </section>
+<!--                <section class="review">-->
+<!--                    <div class="reviewer-container">-->
+<!--                        <img class="reviewer-img" src="https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2024/03/12/1710248677621.png?RS=62x60&CS=60x60" alt="#">-->
+<!--                        <span class="reviewer-nickname">Haruuu</span>-->
+<!--                    </div>-->
+<!--                    <div class="review-content-container">-->
+<!--                        <div class="review-header">-->
+<!--                            <span class="review-score">-->
+<!--                                <i class="fa-solid fa-star"></i>-->
+<!--                                <i class="fa-regular fa-star"></i>-->
+<!--                            </span>-->
+<!--                            <span class="review-date">2024.04.02</span>-->
+<!--                        </div>-->
+<!--                        <div class="review-body">-->
+<!--                            <p class="review-content">너무너무 맛있어요! 다시 시켜먹구싶어요!</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--                <section class="review">-->
+<!--                    <div>현재 작성된 리뷰가 없습니다....</div>-->
+<!--                </section>-->
             </article>
         </section>
 </main>

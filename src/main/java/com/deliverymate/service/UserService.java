@@ -1,5 +1,6 @@
 package com.deliverymate.service;
 
+import com.deliverymate.domain.ReviewDTO;
 import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.CartDTO;
 import com.deliverymate.domain.UserDTO;

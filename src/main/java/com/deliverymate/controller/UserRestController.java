@@ -1,6 +1,7 @@
 package com.deliverymate.controller;
 
 
+import com.deliverymate.domain.ReviewDTO;
 import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.service.UserEmailService;
@@ -74,5 +75,7 @@ public class UserRestController {
         userService.remove_user_wishlist(userDTO.getId(), storeNo);
         return ResponseEntity.ok().body(null);
     }
+
+
 
 }

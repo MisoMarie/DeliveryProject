@@ -1,6 +1,6 @@
 package com.deliverymate.mapper;
 
-import com.deliverymate.domain.CartDTO;
+import com.deliverymate.domain.ReviewDTO;
 import com.deliverymate.domain.StoreDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -38,8 +38,6 @@ public interface UserMapper {
             @Param("password") String password
     );
 
-    List<CartDTO> selectCartsByUserId(String userId);
-
     /****************** wishlist ********************/
     List<StoreDTO> select_wishlist_of_user(String id);
     void insert_wishlist(
@@ -49,5 +47,12 @@ public interface UserMapper {
     void delete_wishlist(
             @Param("userId") String userId,
             @Param("storeNo") Integer storeNo
+    );
+
+    /****************** review ********************/
+    // 해당 방의 모든 REIVEW 가져오기
+    List<ReviewDTO> select_store_reviews_by_storeNo(
+            @Param("storeNo") Integer storeNo,
+            @Param("order") String order
     );
 }

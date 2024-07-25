@@ -1,3 +1,10 @@
+const reviewSectionH3 = document.querySelector('.review-section-header > h3');
+const reviewContainer = document.querySelector('.review-container');
+const path = location.pathname.split('/');
+const storeNo = path[path.length - 1];
+
+
+/*************************** KAKAO MAP VIEW *************************/
 document.addEventListener('DOMContentLoaded', () => {
     function getRandomCoordinates() {
         const minLongitude = 128.4;
@@ -50,56 +57,55 @@ function map_setting(longitude, latitude) {
     marker.setMap(map);
 }
 
+/*************************** REVIEW *************************/
 
-////////////////////////주문하기////////////////////////////
-const cartBtn = document.getElementById('cart-btn');
-// 장바구니 버튼
-cartBtn.onclick = () => {
-    if(check_input()){
-        const data = new FormData(orderForm);
-        const csrfToken = data.get('_csrf');
-        fetch(`/user/cart`, {
-            method: 'POST',
-            headers: {"X-CSRF-TOKEN": csrfToken},
-            body: data
-        }).then(response => {
-            switch(response.status){
-                case 201:
-                    alert("장바구니에 상품을 추가하였습니다");
-                    break;
-                case 401:
-                    alert("로그인이 필요합니다");
-                    break;
-                default:
-                    alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+get_reviews('recent'); // 사이트 접속 시 최초 요청
+function get_reviews(order){
+    fetch(`/review/${storeNo}?order=${order}`)
+        .then(response => response.json())
+        .then(reviewList => {
+            reviewContainer.innerHTML = '';
+            reviewSectionH3.textContent = '후기 0개';
+
+            if(reviewList.length === 0){
+                reviewContainer.innerHTML =
+                    `<section class="review">
+                    <div>현재 작성된 리뷰가 없습니다....</div>
+                </section>`;
+                return;
+            }
+
+            reviewSectionH3.textContent = `후기 ${reviewList.length}개`;
+            for (const review of reviewList) {
+                let starHTML = ``;
+                for(let i = 1; i <= review.score; i++){
+                    starHTML += `<i class="fa-solid fa-star"></i>`;
+                }
+                for(let i = 1; i <= 5 - review.score; i++){
+                    starHTML += `<i class="fa-regular fa-star"></i>`;
+                }
+                reviewContainer.insertAdjacentHTML(`beforeend`,
+                    `<section class="review">
+                    <div class="reviewer-container">
+                        <img class="reviewer-img" src="${review.user.image.imageURL}" alt="#" onerror="this.src='https://image.oliveyoung.co.kr/uploads/images/mbrProfile/2024/03/12/1710248677621.png?RS=62x60&CS=60x60'">
+                        <span class="reviewer-nickname">${review.user.nickname}</span>
+                    </div>
+                    <div class="review-content-container">
+                        <div class="review-header">
+                            <span class="review-score">
+                                ${starHTML}
+                            </span>
+                            <span class="review-date">${review.write_date}</span>
+                        </div>
+                        <div class="review-body">
+                            <p class="review-content">
+                                ${review.content}
+                            </p>
+                        </div>
+                    </div>
+                </section>`
+                );
+
             }
         })
-    }
 }
-
-// 담기 전, 확인 사항
-function check_input(){
-const amountInput = document.getElementsByClassName('number-select');
-
-    if(+amountInput.value < 1){
-        alert('적어도 하나 이상의 음식을 고르셔야 합니다 !');
-        return false;
-    }
-    return true;
-}
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,4 +22,5 @@ public class StoreDTO {
     private List<FoodDTO> foods;
     private ImageDTO storeImg;
     private Boolean isWished;
+    private List<ReviewDTO> reviews;
 }

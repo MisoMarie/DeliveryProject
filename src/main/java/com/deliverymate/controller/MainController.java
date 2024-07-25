@@ -23,26 +23,7 @@ public class MainController {
         return "public/main";
     }
 
-    @GetMapping("/filter/{category}")
-    public String get_filter(
-            @PathVariable("category") String category,
-            Model model
-    ) {
-        List<StoreDTO> store = mainService.get_filter(category);
-        model.addAttribute("store", store);
-        return "filter";
-    }
 
-    @GetMapping("/store/{storeNo}")
-    public String get_store(
-            @PathVariable("storeNo") Integer storeNo,
-            Model model
-    ) {
-        StoreDTO store = mainService.get_store(storeNo);
-        model.addAttribute("store", store);
-        System.out.println(store);
-        return "store";
-    }
 
 
 }

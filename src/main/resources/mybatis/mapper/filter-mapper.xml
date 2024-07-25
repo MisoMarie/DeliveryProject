@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.deliverymate.mapper.FilterMapper">
-
-
-<!--    <select id="select_filter_by_store" resultMap="StoreResultMap">-->
-<!--        SELECT *-->
-<!--        FROM store-->
-<!--        WHERE category = #{category}-->
-<!--    <select id="select_filter_by_store" resultMap="StoreResultMap">-->
-<!--        SELECT *-->
-<!--        FROM store-->
-<!--        WHERE category = #{category}-->
-<!--    </select>-->
 
 
     <select id="select_filter_by_store" resultMap="StoreResultMap">
@@ -28,15 +17,12 @@
 
     <select id="select_storeNo_by_store" resultMap="StoreResultMap">
         SELECT
-            *
             *,
             IF(wl.user_id = #{userId}, TRUE, FALSE) AS 'is_wished'
         FROM
             store s
                 LEFT JOIN
             food f
-            ON
-                s.store_no = f.food_store_no
             ON s.store_no = f.food_store_no
                 LEFT JOIN
             wishlist wl
@@ -62,7 +48,7 @@
         <collection property="foods" ofType="com.deliverymate.domain.FoodDTO" autoMapping="true">
             <id property="foodId" column="food_id"/>
             <association property="foodImage" javaType="com.deliverymate.domain.ImageDTO">
-                <id property="foodId" column="food_image"/>
+                <id property="image" column="food_image"/>
             </association>
         </collection>
     </resultMap>
