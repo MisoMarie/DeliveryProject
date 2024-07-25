@@ -8,9 +8,15 @@ const checkIdBtn = document.getElementById('id-duplication-btn');
 const togglePasswordBtn = document.querySelector('.pw-view-btn');
 const togglePasswordIcon = togglePasswordBtn.querySelector('i');
 
-
 const phoneHeadInput = document.getElementById('phone-head');
 const phoneBodyInput = document.getElementById('phone-body');
+const cancelBtn = document.getElementById('cancel-btn');
+
+
+cancelBtn.onclick = () => {
+    location.href = '/user/login';
+}
+
 if (phoneHeadInput && phoneBodyInput) {
     phoneBodyInput.addEventListener('input', function () {
         phoneInput.value = `${phoneHeadInput.value}${phoneBodyInput.value}`;
@@ -32,42 +38,6 @@ if (emailHeadInput && emailBodyInput) {
     emailBodyInput.addEventListener('change', updateEmailInput);
 }
 
-// registerBtn.addEventListener('click', function (event) {
-//     event.preventDefault(); // 기본 폼 제출 방지
-//
-//     // 유효성 검사
-//     const idValue = idInput.value;
-//     const passwordValue = passwordInput.value;
-//
-//     if (idValue.length < 4 || idValue.length > 8) {
-//         alert('ID는 최소 4글자에서 최대 8글자여야 합니다.');
-//         return;
-//     }
-//
-//     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{4,10}$/;
-//     if (!passwordRegex.test(passwordValue)) {
-//         alert('비밀번호는 4~10글자로 영문자, 숫자, 특수문자를 포함해야 합니다.');
-//         return;
-//     }
-//
-//     // 전화번호와 이메일 설정 업데이트
-//     if (phoneHeadInput && phoneBodyInput) {
-//         phoneInput.value = `${phoneHeadInput.value}${phoneBodyInput.value}`;
-//     }
-//
-//     if (emailHeadInput && emailBodyInput) {
-//         if (emailBodyInput.value === '직접입력') {
-//             emailInput.value = emailHeadInput.value;
-//         } else {
-//             emailInput.value = `${emailHeadInput.value}@${emailBodyInput.value}`;
-//         }
-//     }
-//
-//     document.forms.item(0).submit();
-// });
-
-
-
 togglePasswordBtn.addEventListener('click', function () {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
@@ -81,10 +51,6 @@ togglePasswordBtn.addEventListener('click', function () {
         togglePasswordIcon.classList.add('fa-eye-slash');
     }
 });
-
-
-
-
 
 checkIdBtn.addEventListener('click', function () {
     const idValue = idInput.value;
@@ -129,7 +95,20 @@ registerBtn.addEventListener('click', function (event) {
         return;
     }
 
+    // 전화번호와 이메일 설정 업데이트
+    if (phoneHeadInput && phoneBodyInput) {
+        phoneInput.value = `${phoneHeadInput.value}${phoneBodyInput.value}`;
+    }
 
+    if (emailHeadInput && emailBodyInput) {
+        if (emailBodyInput.value === '직접입력') {
+            emailInput.value = emailHeadInput.value;
+        } else {
+            emailInput.value = `${emailHeadInput.value}@${emailBodyInput.value}`;
+        }
+    }
+
+    // ID 중복 체크 후 폼 제출
     fetch(`/user/checkId?id=${idValue}`)
         .then(response => {
             if (!response.ok) {
@@ -141,7 +120,8 @@ registerBtn.addEventListener('click', function (event) {
             if (data) {
                 alert('이미 사용 중인 ID입니다.');
             } else {
-                document.forms.item(0).submit();
+                // CSRF 토큰을 포함한 폼 제출
+                document.forms.item(1).submit();
             }
         })
         .catch(error => {
