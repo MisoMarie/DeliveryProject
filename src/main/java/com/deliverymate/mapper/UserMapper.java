@@ -1,5 +1,6 @@
 package com.deliverymate.mapper;
 
+import com.deliverymate.domain.CartDTO;
 import com.deliverymate.domain.ReviewDTO;
 import com.deliverymate.domain.StoreDTO;
 import org.apache.ibatis.annotations.Insert;
@@ -49,10 +50,25 @@ public interface UserMapper {
             @Param("storeNo") Integer storeNo
     );
 
+    /********************* 장바구니 **************************/
+    List<CartDTO> selectCartsByUserId(String userId);
+    CartDTO selectCartDuplicated(CartDTO cart); // 장바구니에 해당 상품이 존재?
+    void insertCart(CartDTO cart); // 장바구니에 상품 추가
+    void updateCartAmount(
+            @Param("cartNo") Integer cartNo,
+            @Param("amount") Integer amount
+    ); // 장바구니에 존재하는 상품의 수량 변경
+    void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
+
+
+
+
     /****************** review ********************/
     // 해당 방의 모든 REIVEW 가져오기
     List<ReviewDTO> select_store_reviews_by_storeNo(
             @Param("storeNo") Integer storeNo,
             @Param("order") String order
     );
+
+
 }

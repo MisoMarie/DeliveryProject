@@ -56,10 +56,10 @@
             ON F.food_store_no = CART.no
             INNER JOIN `store` ST
             ON ST.store_no = F.food_store_no
-        WHERE CART.user_id = #{userId}
+        WHERE CART.user_id = #{u+
+        serId}
 
     </select>
-
 
     <!--**********************************************************-->
     <select id="select_wishlist_of_user" resultMap="com.deliverymate.mapper.FilterMapper.StoreResultMap">

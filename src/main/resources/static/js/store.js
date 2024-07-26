@@ -2,6 +2,8 @@ const reviewSectionH3 = document.querySelector('.review-section-header > h3');
 const reviewContainer = document.querySelector('.review-container');
 const path = location.pathname.split('/');
 const storeNo = path[path.length - 1];
+const cartBtn = document.getElementById('cart-btn');
+const orderForm = document.getElementById('order-form');
 
 
 /*************************** KAKAO MAP VIEW *************************/
@@ -56,6 +58,44 @@ function map_setting(longitude, latitude) {
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 }
+/*************************** 장바구니 ****************************/
+
+// 장바구니 버튼
+cartBtn.onclick = () => {
+    if(check_input()){
+        const data = new FormData(orderForm);
+        const csrfToken = data.get('_csrf');
+        fetch(`/user/cart`, {
+            method: 'POST',
+            headers: {"X-CSRF-TOKEN": csrfToken},
+            body: data
+        }).then(response => {
+            console.log(response)
+            switch(response.status){
+                case 201:
+                    alert("장바구니에 음식 상품을 추가하였습니다");
+                    break;
+                case 401:
+                    alert("로그인이 필요합니다");
+                    break;
+                default:
+                    alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+            }
+        })
+        console.log("보내짐")
+    }
+}
+
+// 음식 수량 체크
+function check_input(){
+    const foodAmount = document.querySelector('.number-select');
+    if(+foodAmount.value < 1){
+        alert('적어도 하나 이상 선택해야 합니다.');
+        return false;
+    }
+    return true;
+}
+
 
 /*************************** REVIEW *************************/
 

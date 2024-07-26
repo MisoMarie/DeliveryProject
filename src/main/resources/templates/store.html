@@ -13,6 +13,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e02c96b7b84824c8d284897a19a83&libraries=services,clusterer,drawing"></script>
     <script th:src="@{/js/store.js}" defer></script>
     <script th:src="@{/js/wishlist.js}" defer></script>
+    <script src="../static/js/store.js" th:src="@{/js/store.js}" defer></script>
 </head>
 <body>
     <main layout:fragment="main" class="store">
@@ -45,27 +46,31 @@
             <p th:text="|${store.deliveryTime}분|">배달시간: 40~55분</p>
             <p th:text="|${#numbers.formatInteger(store.deliveryTip, 0, 'COMMA')}원|">배달팁: 무료</p>
         </section>
-        <form class="store-menu">
-            <div class="menus" th:each="food : ${store.foods}">
+        <form th:action="@{/user/cart}" class="store-menu" method="post" th:each="food : ${store.foods}" id="order-form">
+            <div class="menus">
                 <figure>
-                    <img th:src="${food.foodImage.imageURL}"  alt="#">
+                    <img th:src="${food.foodImage.imageURL}" alt="#">
                 </figure>
                 <div>
                     <p th:text="${food.foodName}">빅맥이다</p>
                     <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p th:text="${food.foodPrice}">100만원</p>
-                    <select class="number-select">
+                    <select class="number-select" name="amount">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </div>
             </div>
-            <p>총 합계: 100000만원</p>
-            <button>주문하기</button>
+            <button id="cart-btn">장바구니 담기</button>
         </form>
         <section class="store-position-section">
             <h3>가게 위치</h3>

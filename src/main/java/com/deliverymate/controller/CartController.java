@@ -28,45 +28,45 @@ public class CartController {
     /************************ 장바구니 ********************/
     // 장바구니 화면으로 이동
     @GetMapping("/cart")
-    public String get_user_cart(
+    public void get_user_cart(
             @AuthenticationPrincipal UserDTO user,
             Model model
     ){
+        System.out.println(user);
         List<CartDTO> carts = new ArrayList<>();
         if(!Objects.isNull(user)){
             carts = userService.get_carts(user);
         }
         log.info(carts);
         model.addAttribute("carts", carts);
-        return "user/cart";
     }
 
-//    // 장바구니에 상품을 추가
-//    @ResponseBody
-//    @PostMapping("/cart")
-//    public ResponseEntity<Void> post_user_cart(
-//            @AuthenticationPrincipal UserDTO user,
-//            CartDTO cart
-//    ){
-//        log.info(cart);
-//        if(Objects.isNull(user)){
-//            log.error("로그인 되지 않은 유저의 장바구니 삽입 시도");
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//        }
-//        userService.add_cart(user, cart);
-//        // 장바구니 삽입 성공
-//        return ResponseEntity.status(HttpStatus.CREATED).body(null);
-//    }
+    // 장바구니에 상품을 추가
+    @ResponseBody
+    @PostMapping("/cart")
+    public ResponseEntity<Void> post_user_cart(
+            @AuthenticationPrincipal UserDTO user,
+            CartDTO cart
+    ){
+        log.info(cart);
+        if(Objects.isNull(user)){
+            log.error("로그인 되지 않은 유저의 장바구니 삽입 시도");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+        userService.add_cart(user, cart);
+        // 장바구니 삽입 성공
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
 
-//    @ResponseBody
-//    @DeleteMapping("/cart")
-//    public ResponseEntity<Void> delete_user_cart(
-//            @RequestBody List<CartDTO> carts
-//    ){
-//        log.info(carts);
-//        userService.delete_cart(carts);
-//        return ResponseEntity.ok().body(null);
-//    }
+    @ResponseBody
+    @DeleteMapping("/cart")
+    public ResponseEntity<Void> delete_user_cart(
+            @RequestBody List<CartDTO> carts
+    ){
+        log.info(carts);
+        userService.delete_cart(carts);
+        return ResponseEntity.ok().body(null);
+    }
 
 
 //    /************************ 주문 ********************/

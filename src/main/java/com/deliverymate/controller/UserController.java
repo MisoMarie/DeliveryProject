@@ -33,6 +33,11 @@ public class UserController {
         return "user/mypage";
     }
 
+//    @PostMapping("/mypage")
+//    public String
+
+
+
     @PostMapping("/register")
     public String registerUser(
             UserDTO user
