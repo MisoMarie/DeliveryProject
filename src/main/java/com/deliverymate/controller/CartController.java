@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class CartController {
     @GetMapping("/cart")
     public void get_user_cart(
             @AuthenticationPrincipal UserDTO user,
+            @PathVariable StoreDTO store,
             Model model
     ){
         List<CartDTO> carts = new ArrayList<>();
@@ -67,6 +69,26 @@ public class CartController {
 //        userService.delete_cart(carts);
 //        return ResponseEntity.ok().body(null);
 //    }
+
+    // 장바구니에 담기는 음식의 가게 정보 비교
+    @GetMapping("/cart/duplicate")
+    public boolean get_foodId(
+            Integer storeNo,
+            @AuthenticationPrincipal UserDTO loginUser
+    ){
+        List<CartDTO> carts = userService.get_carts(loginUser);
+        if(carts == null || carts.size() == 0) {
+            return true; // 장바구니에 담기가 가능
+        }
+        CartDTO cart = carts.get(0);
+        StoreDTO cartStore = cart.getStore();
+        if(cartStore.getStoreNo() == storeNo){//foodId에 해당하는 상점의 no){
+            return true; // 가능
+        }else{
+            return false; // 담을 수 없음
+        }
+    }
+
 
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDTO {
+public class CartDTO{
     private Integer cartNo; // 카트 넘버
     private UserDTO user; // 음식을 주문한 유저 정보
     private StoreDTO store; // 상점정보

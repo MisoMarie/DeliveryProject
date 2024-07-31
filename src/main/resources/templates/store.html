@@ -24,7 +24,7 @@
             </section>
         </div>
         <section class="store-head">
-            <h1 id="store-name"  th:text="${store.storeName}">가게이름 어쩌구 저쩌구</h1>
+            <h1 id="store-name" th:text="${store.storeName}">가게이름 어쩌구 저쩌구</h1>
             <div class="btn-container">
                 <button class="save-btn" type="button" th:if="${store.isWished}" th:onclick="|remove_wishlist(${store.storeNo}, this)|">
                     <i class="fa-solid fa-heart"></i>
@@ -48,6 +48,7 @@
         </section>
         <form th:action="@{/user/cart}" class="store-menu" method="post" th:each="food : ${store.foods}" id="order-form">
             <div class="menus">
+                <input type="text" id="store-no" name="storeNo" th:value="${store.storeNo}" hidden>
                 <input type="text" name="food.foodId" th:value="${food.foodId}" hidden>
                 <figure>
                     <img th:src="${food.foodImage.imageURL}" alt="#">

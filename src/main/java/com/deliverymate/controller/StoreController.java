@@ -1,6 +1,7 @@
 package com.deliverymate.controller;
 
 
+import com.deliverymate.domain.FoodDTO;
 import com.deliverymate.domain.ReviewDTO;
 import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
@@ -62,6 +63,14 @@ public class StoreController {
         List<ReviewDTO> reviews = mainService.get_store_reviews(storeNo, order);
         return ResponseEntity.ok(reviews);
     }
+
+    // 사용자는  foodId를 전달해줄 것이다.
+    // 그럼 해당 foodId의 상점 정보를 조회 => 그래야 이 음식이 어느 상점것인지 아니까
+    // 그리고 현재 장바구니에 있는 아무 음식이나 하나 가져온다 => 왜? 해당 장바구니의 상점 정보를 알아야 하니까
+    // 두 상점을 비교한다
+    //  => 다르면, 장바구니에 그냥 못넣는다고 해줌
+    //  => 같으면,
+
 
 
 }

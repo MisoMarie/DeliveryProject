@@ -28,18 +28,18 @@
                 <div class="product" th:if="${carts.size() == 0}">
                     <b>상품이 존재하지 않습니다.</b>
                 </div>
-                <div class="product" th:each="cart: ${carts}" th:with="product=${cart.food}">
+                <div class="product" th:each="cart: ${carts}">
                     <label><input type="checkbox"></label>
-<!--                    <a th:href="@{|/filter/store/${product.foodStoreNo}|}" class="product-img-container">-->
-<!--                        <img th:src="|data:image/*;base64, ${product.images[0].url}|" src="https://i.namu.wiki/i/l0x04r27DjSQmS-WgYk6I5x6IkKMyvZjRMyK5dI3EMoMikzCd2Kfl2SMRdvL3-y4zpxI_qLP-fs3QToSR7AU3g.webp" alt="#">-->
-<!--                    </a>-->
+                    <a th:href="@{|/filter/store/${cart.store.storeNo}|}" class="product-img-container">
+                        <img th:src="|${cart.food.foodImage.imageURL}|" src="https://i.namu.wiki/i/l0x04r27DjSQmS-WgYk6I5x6IkKMyvZjRMyK5dI3EMoMikzCd2Kfl2SMRdvL3-y4zpxI_qLP-fs3QToSR7AU3g.webp" alt="#">
+                    </a>
                     <div class="product-information-container">
                         <div>
                             <a class="name" th:text="${cart.food.foodName}">빅맥</a>
                         </div>
                         <div>
                             <b>음식점 이름:</b>
-                            <span th:text="${product.food.store.storeName}">대충 음식점</span>
+                            <span th:text="${cart.store.storeName}">대충 음식점</span>
                         </div>
                         <div>
                             <b>음식 카테고리:</b>
@@ -72,11 +72,11 @@
                     <div>
                         <span>총 상품금액</span>
                         <span th:if="${carts.size() == 0}">0원</span>
-                        <span th:unless="${carts.size() == 0}" th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![cart.food.foodPrice]), 3, 'COMMA')}원|">733,000원</span>
+                        <span th:unless="${carts.size() == 0}" th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![food.foodPrice]), 3, 'COMMA')}원|">733,000원</span>
                     </div>
                     <div>
                         <span>배달비</span>
-                        <span th:text="${product.storeNo.deliveryTip}">0원</span>
+                        <span th:text="|${#numbers.formatInteger(#aggregates.sum(carts.![store.deliveryTip]), 3, 'COMMA')}원|">0원</span>
                     </div>
                 </div>
 

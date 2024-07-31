@@ -65,6 +65,13 @@ cartBtn.onclick = () => {
     if(check_input()){
         const data = new FormData(orderForm);
         const csrfToken = data.get('_csrf');
+        fetch(``).then(response => {
+        }).then(value => {
+            if(!value){
+                alert("장바구니에는 한 가게에서 가져온 음식들만 담아야 합니다. 장바구니에 있는 음식들을 지울까요?");
+            }
+        })
+
         fetch(`/user/cart`, {
             method: 'POST',
             headers: {"X-CSRF-TOKEN": csrfToken},
@@ -84,7 +91,15 @@ cartBtn.onclick = () => {
         })
         console.log("보내짐")
     }
+
 }
+function StoreCheck() {
+    const stores = document.getElementById('store-no');
+
+
+}
+
+
 
 // 음식 수량 체크
 function check_input(){

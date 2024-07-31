@@ -97,7 +97,7 @@ function buy_cart_items(items){
 IMP.init("imp14271731");
 const amountChoose = document.querySelectorAll('input[name="amount"]'); // amount에 장바구니 최종 금액이 들어감
 
-buyButton.onclick = () => { // . 안에 클래스나 id명
+cartBuyBtn.onclick = () => { // . 안에 클래스나 id명
     let selectedCost;
     let userId;
     let foodName;
