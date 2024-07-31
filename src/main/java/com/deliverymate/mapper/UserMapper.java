@@ -1,11 +1,8 @@
 package com.deliverymate.mapper;
 
-import com.deliverymate.domain.CartDTO;
-import com.deliverymate.domain.ReviewDTO;
-import com.deliverymate.domain.StoreDTO;
+import com.deliverymate.domain.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import com.deliverymate.domain.UserDTO;  // Ensure you import UserDTO
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
@@ -51,14 +48,14 @@ public interface UserMapper {
     );
 
     /********************* 장바구니 **************************/
-    List<CartDTO> selectCartsByUserId(String userId);
-    CartDTO selectCartDuplicated(CartDTO cart); // 장바구니에 해당 상품이 존재?
-    void insertCart(CartDTO cart); // 장바구니에 상품 추가
-    void updateCartAmount(
-            @Param("cartNo") Integer cartNo,
-            @Param("amount") Integer amount
-    ); // 장바구니에 존재하는 상품의 수량 변경
-    void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
+
+    List<CartDTO> selectCartsByUserId(String userId); // 어느 유저가 주문한 상품들 조회
+    void insertCart(CartDTO cart); // 장바구니에 유저 상품 추가
+//    void updateCartAmount(
+//            @Param("cartNo") Integer cartNo,
+//            @Param("amount") Integer amount
+//    ); // 장바구니에 존재하는 상품의 수량 변경
+//    void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
 
 
 

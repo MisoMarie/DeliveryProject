@@ -44,22 +44,41 @@
         WHERE `pw_reset_token` = #{token}
     </update>
     <!--*************************장바구니***************************-->
-    <select id="selectCartsByUserId" resultType="CartDTO">
-        SELECT
-            CART.no,
-            ST.category,
-            F.food_id,
-            F.food_name,
-            F.food_image
-        FROM `cart` CART
-            INNER JOIN `food` F
-            ON F.food_store_no = CART.no
-            INNER JOIN `store` ST
-            ON ST.store_no = F.food_store_no
-        WHERE CART.user_id = #{u+
-        serId}
+    <resultMap id="selectCartWithFoodMap" type="CartDTO" autoMapping="true">
+        <id property="cartNo" column="cart_no" />
+        <association property="store" javaType="com.deliverymate.domain.StoreDTO" autoMapping="true">
+            <id property="storeNo" column="store_no" />
+        </association>
 
+        <association property="food" javaType="FoodDTO" autoMapping="true">
+            <id property="foodId" column="food_id"/>
+            <association property="foodImage" javaType="com.deliverymate.domain.ImageDTO">
+                <id property="image" column="food_image"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <!--  장바구니 조회   -->
+    <select id="selectCartsByUserId" resultType="CartDTO" resultMap="selectCartWithFoodMap">
+        SELECT
+            C.*,
+            F.*,
+            ST.*
+        FROM `cart` C
+            INNER JOIN `food` F
+                ON F.food_id = C.cart_food_id
+            INNER JOIN `store` ST
+                ON F.food_store_no = ST.store_no
+        WHERE C.cart_user_id = #{userId}
     </select>
+    <!-- 장바구니 삽입   -->
+    <insert id="insertCart">
+        INSERT INTO `cart` (cart_no, cart_user_id, cart_food_id, cart_count)
+        VALUE (NULL, #{user.id}, #{food.foodId}, #{count})
+    </insert>
+
+
+
 
     <!--**********************************************************-->
     <select id="select_wishlist_of_user" resultMap="com.deliverymate.mapper.FilterMapper.StoreResultMap">

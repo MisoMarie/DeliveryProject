@@ -2,8 +2,11 @@ package com.deliverymate.controller;
 
 
 import com.deliverymate.domain.CartDTO;
+import com.deliverymate.domain.FoodDTO;
+import com.deliverymate.domain.StoreDTO;
 import com.deliverymate.domain.UserDTO;
 import com.deliverymate.service.UserService;
+import jakarta.mail.Store;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,78 +28,45 @@ public class CartController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/test")
+    public void test(String data, Model model){
+        model.addAttribute("data", data);
+    }
+
     /************************ 장바구니 ********************/
-    // 장바구니 화면으로 이동
+    // 장바구니 화면으로 이동.
     @GetMapping("/cart")
     public void get_user_cart(
             @AuthenticationPrincipal UserDTO user,
             Model model
     ){
-        System.out.println(user);
         List<CartDTO> carts = new ArrayList<>();
-        if(!Objects.isNull(user)){
-            carts = userService.get_carts(user);
-        }
-        log.info(carts);
+        carts = userService.get_carts(user);
         model.addAttribute("carts", carts);
+        System.out.println(carts);
     }
 
     // 장바구니에 상품을 추가
-    @ResponseBody
     @PostMapping("/cart")
     public ResponseEntity<Void> post_user_cart(
             @AuthenticationPrincipal UserDTO user,
-            CartDTO cart
+             CartDTO cart
     ){
         log.info(cart);
-        if(Objects.isNull(user)){
-            log.error("로그인 되지 않은 유저의 장바구니 삽입 시도");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
-        userService.add_cart(user, cart);
+        cart.setUser(user);
+        userService.add_cart(cart);
         // 장바구니 삽입 성공
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @ResponseBody
-    @DeleteMapping("/cart")
-    public ResponseEntity<Void> delete_user_cart(
-            @RequestBody List<CartDTO> carts
-    ){
-        log.info(carts);
-        userService.delete_cart(carts);
-        return ResponseEntity.ok().body(null);
-    }
-
-
-//    /************************ 주문 ********************/
-//    @GetMapping("/order")
-//    public String get_user_order(
-//            HttpSession session,
-//            Model model
+//    @DeleteMapping("/cart")
+//    public ResponseEntity<Void> delete_user_cart(
+//            @RequestBody List<CartDTO> carts
 //    ){
-//        Object cartsData = session.getAttribute("carts");
-//        session.removeAttribute("carts");
-//        if(Objects.isNull(cartsData)){
-//            log.error("cart 데이터가 존재하지 않음");
-//            return "redirect:/user/cart";
-//        }
-//        List<CartDTO> carts = (List<CartDTO>) cartsData;
-//        productService.set_product_information_of_carts(carts);
-//        Integer totalPrice = carts.parallelStream().mapToInt(cart -> cart.getProduct().getPrice()).sum();
 //        log.info(carts);
-//        model.addAttribute("carts", carts);
-//        model.addAttribute("total_price", totalPrice);
-//        return "user/order";
+//        userService.delete_cart(carts);
+//        return ResponseEntity.ok().body(null);
 //    }
-//
-//    @PostMapping("/order")
-//    public void post_user_order(
-//            @RequestBody List<CartDTO> carts,
-//            HttpSession session
-//    ){
-//        log.info(carts + "등록중..");
-//        session.setAttribute("carts", carts);
-//    }
+
 
 }

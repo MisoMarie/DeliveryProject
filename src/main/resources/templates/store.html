@@ -48,6 +48,7 @@
         </section>
         <form th:action="@{/user/cart}" class="store-menu" method="post" th:each="food : ${store.foods}" id="order-form">
             <div class="menus">
+                <input type="text" name="food.foodId" th:value="${food.foodId}" hidden>
                 <figure>
                     <img th:src="${food.foodImage.imageURL}" alt="#">
                 </figure>
@@ -55,7 +56,7 @@
                     <p th:text="${food.foodName}">빅맥이다</p>
                     <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p th:text="${food.foodPrice}">100만원</p>
-                    <select class="number-select" name="amount">
+                    <select class="number-select" name="count">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>

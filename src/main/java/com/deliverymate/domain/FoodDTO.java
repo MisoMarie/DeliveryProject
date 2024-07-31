@@ -15,5 +15,4 @@ public class FoodDTO {
     private Integer foodPrice;
     private String foodDescription;
     private ImageDTO foodImage;
-    private Integer foodStoreNo;
 }

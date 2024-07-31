@@ -40,7 +40,6 @@ public class StoreController {
     ) {
         List<StoreDTO> store = mainService.get_filter(category,userDTO);
         model.addAttribute("store", store);
-        System.out.println(store);
         return "filter";
     }
 
@@ -52,7 +51,6 @@ public class StoreController {
     ) {
         StoreDTO store = mainService.get_store(storeNo, userDTO);
         model.addAttribute("store", store);
-        System.out.println(store);
         return "store";
     }
 
