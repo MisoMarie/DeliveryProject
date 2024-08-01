@@ -63,12 +63,11 @@ public class UserService {
 
 
 
-
-//    // 장바구니에 상품 제거하기
-//    public void delete_cart(List<CartDTO> carts){
-//        // 장바구니에 현재 회원 설정
-//        userMapper.deleteCart(carts);
-//    }
+    // 장바구니에 상품 제거하기
+    public void delete_cart(List<CartDTO> carts){
+        // 장바구니에 현재 회원 설정
+        userMapper.deleteCart(carts);
+    }
 
 
 

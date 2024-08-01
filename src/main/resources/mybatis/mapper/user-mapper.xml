@@ -77,6 +77,13 @@
         VALUE (NULL, #{user.id}, #{food.foodId}, #{count})
     </insert>
 
+    <delete id="deleteCart">
+        DELETE FROM `cart` WHERE
+        <foreach collection="carts" item="cart" separator="OR">
+            `no` = #{cart.cartNo}
+        </foreach>
+    </delete>
+
 
 
 

@@ -39,7 +39,6 @@ public class CartController {
     @GetMapping("/cart")
     public void get_user_cart(
             @AuthenticationPrincipal UserDTO user,
-            @PathVariable StoreDTO store,
             Model model
     ){
         List<CartDTO> carts = new ArrayList<>();
@@ -61,15 +60,6 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-//    @DeleteMapping("/cart")
-//    public ResponseEntity<Void> delete_user_cart(
-//            @RequestBody List<CartDTO> carts
-//    ){
-//        log.info(carts);
-//        userService.delete_cart(carts);
-//        return ResponseEntity.ok().body(null);
-//    }
-
     // 장바구니에 담기는 음식의 가게 정보 비교
     @GetMapping("/cart/duplicate")
     public boolean get_foodId(
@@ -88,6 +78,17 @@ public class CartController {
             return false; // 담을 수 없음
         }
     }
+
+    @DeleteMapping("/cart")
+    public ResponseEntity<Void> delete_user_cart(
+            @RequestBody List<CartDTO> carts
+    ){
+        log.info(carts);
+        userService.delete_cart(carts);
+        return ResponseEntity.ok().body(null);
+    }
+
+
 
 
 

@@ -1,6 +1,5 @@
 const orderForm = document.getElementById('order-form');
 const productContainers = document.getElementsByClassName('product');
-const csrfTokenInput = orderForm.querySelector('input[name="_csrf"]');
 const allSectionBtn = document.querySelector('.cart-select-container input[type="checkbox"]');
 const allRmBtn = document.getElementById('cart-all-rm-btn');
 const cartBuyBtn = document.getElementById('cart-buy-btn');
@@ -67,7 +66,6 @@ function delete_cart_items(items){
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfTokenInput.value
         },
         body: JSON.stringify(items)
     }).then(response => {
@@ -83,7 +81,6 @@ function buy_cart_items(items){
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfTokenInput.value
         },
         body: JSON.stringify(items)
     }).then(response => {

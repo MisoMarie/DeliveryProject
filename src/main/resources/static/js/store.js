@@ -65,40 +65,48 @@ cartBtn.onclick = () => {
     if(check_input()){
         const data = new FormData(orderForm);
         const csrfToken = data.get('_csrf');
-        fetch(``).then(response => {
+        fetch(`/user/cart/duplicate`).then(response => {
+            // 서버에서 받아온 true, false값?
         }).then(value => {
-            if(!value){
-                alert("장바구니에는 한 가게에서 가져온 음식들만 담아야 합니다. 장바구니에 있는 음식들을 지울까요?");
-            }
-        })
+            if(value === false){
+                const userConfirm = confirm("장바구니에는 한 가게에서 가져온 음식들만 담아야 합니다. 장바구니에 있는 음식들을 지울까요?");
+                if (userConfirm){
+                    fetch(`/user/cart`,{
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }).then(response => {
+                        if(response.ok){
+                            alert('상품을 장바구니에서 제거하였습니다');
+                            // location.reload(); // 화면 새로고침
+                        }
+                    });
+                }
 
-        fetch(`/user/cart`, {
-            method: 'POST',
-            headers: {"X-CSRF-TOKEN": csrfToken},
-            body: data
-        }).then(response => {
-            console.log(response)
-            switch(response.status){
-                case 201:
-                    alert("장바구니에 음식 상품을 추가하였습니다");
-                    break;
-                case 401:
-                    alert("로그인이 필요합니다");
-                    break;
-                default:
-                    alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+            }else{
+                fetch(`/user/cart`, {
+                    method: 'POST',
+                    headers: {"X-CSRF-TOKEN": csrfToken},
+                    body: data
+                }).then(response => {
+                    console.log(response)
+                    switch(response.status){
+                        case 201:
+                            alert("장바구니에 음식 상품을 추가하였습니다");
+                            break;
+                        case 401:
+                            alert("로그인이 필요합니다");
+                            break;
+                        default:
+                            alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+                    }
+                })
             }
         })
         console.log("보내짐")
     }
-
 }
-function StoreCheck() {
-    const stores = document.getElementById('store-no');
-
-
-}
-
 
 
 // 음식 수량 체크

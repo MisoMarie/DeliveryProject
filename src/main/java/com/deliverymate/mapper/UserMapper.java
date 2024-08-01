@@ -55,7 +55,7 @@ public interface UserMapper {
 //            @Param("cartNo") Integer cartNo,
 //            @Param("amount") Integer amount
 //    ); // 장바구니에 존재하는 상품의 수량 변경
-//    void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
+    void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
 
 
 
