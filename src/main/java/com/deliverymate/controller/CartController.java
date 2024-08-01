@@ -79,6 +79,7 @@ public class CartController {
         }
     }
 
+    @ResponseBody
     @DeleteMapping("/cart")
     public ResponseEntity<Void> delete_user_cart(
             @RequestBody List<CartDTO> carts

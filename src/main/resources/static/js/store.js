@@ -2,9 +2,8 @@ const reviewSectionH3 = document.querySelector('.review-section-header > h3');
 const reviewContainer = document.querySelector('.review-container');
 const path = location.pathname.split('/');
 const storeNo = path[path.length - 1];
-const cartBtn = document.getElementById('cart-btn');
+const cartBtns = document.querySelectorAll('.cart-btn');
 const orderForm = document.getElementById('order-form');
-
 
 /*************************** KAKAO MAP VIEW *************************/
 document.addEventListener('DOMContentLoaded', () => {
@@ -61,63 +60,73 @@ function map_setting(longitude, latitude) {
 /*************************** 장바구니 ****************************/
 
 // 장바구니 버튼
-cartBtn.onclick = () => {
-    if(check_input()){
-        const data = new FormData(orderForm);
-        const csrfToken = data.get('_csrf');
-        fetch(`/user/cart/duplicate`).then(response => {
-            // 서버에서 받아온 true, false값?
-        }).then(value => {
-            if(value === false){
-                const userConfirm = confirm("장바구니에는 한 가게에서 가져온 음식들만 담아야 합니다. 장바구니에 있는 음식들을 지울까요?");
-                if (userConfirm){
-                    fetch(`/user/cart`,{
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }).then(response => {
-                        if(response.ok){
-                            alert('상품을 장바구니에서 제거하였습니다');
-                            // location.reload(); // 화면 새로고침
-                        }
-                    });
+for(let i = 0; i < cartBtns.length; i++){
+    cartBtns[i].onclick = () => {
+        if(check_input(i)){
+            const data = new FormData(orderForm);
+            const csrfToken = data.get('_csrf');
+            console.log(data)
+            fetch(`/user/cart/duplicate`,{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": csrfToken
                 }
 
-            }else{
-                fetch(`/user/cart`, {
-                    method: 'POST',
-                    headers: {"X-CSRF-TOKEN": csrfToken},
-                    body: data
-                }).then(response => {
-                    console.log(response)
-                    switch(response.status){
-                        case 201:
-                            alert("장바구니에 음식 상품을 추가하였습니다");
-                            break;
-                        case 401:
-                            alert("로그인이 필요합니다");
-                            break;
-                        default:
-                            alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+            }).then(response => {
+                if(response === false){
+                    const userConfirm = confirm("장바구니에는 한 가게에서 가져온 음식들만 담아야 합니다. 장바구니에 있는 음식들을 지울까요?");
+                    if (userConfirm){
+                        fetch(`/user/cart`,{
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        }).then(response => {
+                            if(response.ok){
+                                alert('상품을 장바구니에서 제거하였습니다');
+                                // location.reload(); // 화면 새로고침
+                            }
+                        });
                     }
-                })
+                }else{
+                    fetch(`/user/cart`, {
+                        method: 'POST',
+                        headers: {"X-CSRF-TOKEN": csrfToken},
+                        body: data
+                    }).then(response => {
+                        console.log(response)
+                        switch(response.status){
+                            case 201:
+                                alert("장바구니에 음식 상품을 추가하였습니다");
+                                break;
+                            case 401:
+                                alert("로그인이 필요합니다");
+                                break;
+                            default:
+                                alert('알 수 없는 에러가 발생했습니다. 관리자에게 문의해주세요')
+                        }
+                    })
+                }
+            })
+            console.log("보내짐")
+
+
+        }
+        // 음식 수량 체크
+        function check_input(i){
+            console.log("수량확인")
+            const foodAmounts = document.getElementsByClassName('number-select');
+            if(+foodAmounts[i].value < 1){
+                alert('적어도 하나 이상 선택해야 합니다.');
+                return false;
             }
-        })
-        console.log("보내짐")
+            return true;
+        }
     }
 }
 
 
-// 음식 수량 체크
-function check_input(){
-    const foodAmount = document.querySelector('.number-select');
-    if(+foodAmount.value < 1){
-        alert('적어도 하나 이상 선택해야 합니다.');
-        return false;
-    }
-    return true;
-}
 
 
 /*************************** REVIEW *************************/

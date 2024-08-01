@@ -46,6 +46,7 @@
     <!--*************************장바구니***************************-->
     <resultMap id="selectCartWithFoodMap" type="CartDTO" autoMapping="true">
         <id property="cartNo" column="cart_no" />
+        <result property="count" column="cart_count" />
         <association property="store" javaType="com.deliverymate.domain.StoreDTO" autoMapping="true">
             <id property="storeNo" column="store_no" />
         </association>
@@ -80,7 +81,7 @@
     <delete id="deleteCart">
         DELETE FROM `cart` WHERE
         <foreach collection="carts" item="cart" separator="OR">
-            `no` = #{cart.cartNo}
+            `cart_no` = #{cart.cartNo}
         </foreach>
     </delete>
 

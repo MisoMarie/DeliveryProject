@@ -13,7 +13,6 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4c7e02c96b7b84824c8d284897a19a83&libraries=services,clusterer,drawing"></script>
     <script th:src="@{/js/store.js}" defer></script>
     <script th:src="@{/js/wishlist.js}" defer></script>
-    <script src="../static/js/store.js" th:src="@{/js/store.js}" defer></script>
 </head>
 <body>
     <main layout:fragment="main" class="store">
@@ -72,7 +71,7 @@
                     </select>
                 </div>
             </div>
-            <button id="cart-btn">장바구니 담기</button>
+            <button type="button" class="cart-btn">장바구니 담기</button>
         </form>
         <section class="store-position-section">
             <h3>가게 위치</h3>
