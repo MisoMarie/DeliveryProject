@@ -63,10 +63,12 @@ function map_setting(longitude, latitude) {
 for(let i = 0; i < cartBtns.length; i++){
     cartBtns[i].onclick = () => {
         if(check_input(i)){
+            const storeNo = document.getElementById("store-no").value;
+            console.log(storeNo);
             const data = new FormData(orderForm);
             const csrfToken = data.get('_csrf');
             console.log(data)
-            fetch(`/user/cart/duplicate`,{
+            fetch(`/user/cart/duplicate?storeNo=${storeNo}`,{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

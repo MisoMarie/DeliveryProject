@@ -1,2 +1,2 @@
 ###
-GET localhost:8080/user/cart/duplicate
+GET localhost:8080/user/cart/duplicate?storeNo=5
