@@ -61,9 +61,10 @@ public class CartController {
     }
 
     // 장바구니에 담기는 음식의 가게 정보 비교
+    @ResponseBody
     @GetMapping("/cart/duplicate")
-    public boolean get_foodId(
-            Integer storeNo,
+    public Boolean get_foodId(
+            @RequestParam Integer storeNo,
             @AuthenticationPrincipal UserDTO loginUser
     ){
         List<CartDTO> carts = userService.get_carts(loginUser);
@@ -72,10 +73,10 @@ public class CartController {
         }
         CartDTO cart = carts.get(0);
         StoreDTO cartStore = cart.getStore();
-        if(cartStore.getStoreNo() == storeNo){//foodId에 해당하는 상점의 no){
-            return true; // 가능
+        if(cartStore.getStoreNo().equals(storeNo)){//foodId에 해당하는 상점의 no){
+            return Boolean.TRUE; // 가능
         }else{
-            return false; // 담을 수 없음
+            return Boolean.FALSE; // 담을 수 없음
         }
     }
 
@@ -83,12 +84,28 @@ public class CartController {
     @ResponseBody
     @DeleteMapping("/cart")
     public ResponseEntity<Void> delete_user_cart(
-            @RequestBody List<CartDTO> carts
+            @AuthenticationPrincipal UserDTO loginUser
     ){
-        log.info(carts);
+        List<CartDTO> carts = userService.get_carts(loginUser);
+        log.info(loginUser);
         userService.delete_cart(carts);
         return ResponseEntity.ok().body(null);
     }
+
+    // 장바구니에 있는 음식 주문
+    @PostMapping("/order")
+    public void post_user_order(
+            @RequestBody List<CartDTO> carts,
+            HttpSession session
+    ){
+        log.info(carts + "등록중..");
+        session.setAttribute("carts", carts);
+    }
+
+
+
+
+
     
 
 

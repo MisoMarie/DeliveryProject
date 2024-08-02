@@ -76,21 +76,20 @@ function delete_cart_items(items){
 // 구매 버튼 눌렀을 때
 cartBuyBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    console.log("구매 버튼이 눌림")
     const items = collect_cart_selected_items();
-    if(items.length <= 0){
-        alert('상품을 하나이상 선택해주세요');
-        return;
-    }
     buy_cart_items(items);
 });
 
 
 // 장바구니 아이템들을 구매
 function buy_cart_items(items){
+    const csrfToken = csrfTokenInput.value;
     fetch(`/user/order`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
         },
         body: JSON.stringify(items)
     }).then(response => {
@@ -100,64 +99,38 @@ function buy_cart_items(items){
     });
 }
 
+////////////////////////////////////////
+IMP.init("imp14271731");
+const amountChoose = document.querySelectorAll('input[name="amount"]'); // amount에 장바구니 최종 금액이 들어감
+console.log(amountChoose);
+cartBuyBtn.onclick = buyFoods;
+////////////////////////////////////////
 
-// IMP.init("imp14271731");
-// const amountChoose = document.querySelectorAll('input[name="amount"]'); // amount에 장바구니 최종 금액이 들어감
-//
-// cartBuyBtn.onclick = () => { // . 안에 클래스나 id명
-//     let selectedCost;
-//     let userId;
-//     let foodName;
-//     // 사용자가 선택한 결제 금액 가져오기
-//     amountChoose.forEach(unit => {
-//         if (unit.checked) {
-//             selectedCost = unit.value;
-//         }
-//     });
-//
-//     // 선택하지 않고 결제 버튼을 누를시 경고 메시지 출력
-//     if (!selectedCost) {
-//         alert("적어도 하나 이상은 선택해야 합니다!");
-//         return;
-//     }
-//
-//     // 아임포트 결제 요청 데이터
-//     let paymentData = {
-//         pg: "kakaopay.TC0ONETIME",
-//         pay_method: "card",
-//         merchant_uid: `order_no_${new Date().getTime()}`,
-//         name: foodName,
-//         buyer_name: userId,
-//         amount: selectedCost
-//     };
-//
-//     // 아임포트 결제 요청
-//     IMP.request_pay(paymentData, function (response) {
-//         if (response.success) {
-//             const token = document.querySelector("meta[name=_csrf]").getAttribute("content");
-//             // 결제 성공 시 서버에 음식 정보를 전달.
-//             fetch('/user/cart', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     "X-CSRF-TOKEN": token
-//                 },
-//                 body: JSON.stringify({...response, foodName,userId,selectedCost}) // 서버에 전송할 데이터
-//             })
-//                 .then(response => {
-//                     if(response.status === 201){
-//                         alert("결제가 성공하였습니다!");
-//                         window.close();
-//                         // 결제 성공 시 이전 페이지로 리다이렉트
-//                     }
-//                 })
-//         } else {
-//             // 결제 실패 시 에러 처리
-//             alert("결제가 실패하였습니다!");
-//         }
-//     });
-// }
+function buyFoods(){
+    let requestData;
+    const foodId = document.getElementsByClassName('product-no');
+    const merchantUid = `order_no_${new Date().getTime()}`; // 주문번호 생성
+    try{
+        requestData = {
+            pg: "kakaopay.TC0ONETIME",
+            merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
+            food_id: foodId.value,
+        };
+        console.log(requestData);
+    }catch (e){
+        alert('음식 구매를 위해서는 로그인 해야 합니다');
+        console.log(e)
+        return;
+    }
+
+}
 
 
-
-
+const orderFoods = {
+    pg: "kakaopay.TC0ONETIME",
+    pay_method: "card",
+    merchant_uid: `order_no_${new Date().getTime()}`, // 주문 고유 번호
+    food_id: `foodId`,
+    buyer_id: `userId`,
+    amount: 64900,
+}

@@ -45,7 +45,7 @@
             <p th:text="|${store.deliveryTime}분|">배달시간: 40~55분</p>
             <p th:text="|${#numbers.formatInteger(store.deliveryTip, 0, 'COMMA')}원|">배달팁: 무료</p>
         </section>
-        <form th:action="@{/user/cart}" class="store-menu" method="post" th:each="food : ${store.foods}" id="order-form">
+        <form th:action="@{/user/cart}" class="store-menu order-form"  method="post" th:each="food : ${store.foods}">
             <div class="menus">
                 <input type="text" id="store-no" name="storeNo" th:value="${store.storeNo}" hidden>
                 <input type="text" name="food.foodId" th:value="${food.foodId}" hidden>
@@ -57,7 +57,6 @@
                     <p th:text="${food.foodDescription}">참깨빵위 순쇠고기 패티두장 특별한소스 양상추</p>
                     <p th:text="${food.foodPrice}">100만원</p>
                     <select class="number-select" name="count">
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
