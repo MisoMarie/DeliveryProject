@@ -79,6 +79,7 @@ public class CartController {
         }
     }
 
+    // 장바구니 제거
     @ResponseBody
     @DeleteMapping("/cart")
     public ResponseEntity<Void> delete_user_cart(
@@ -88,6 +89,7 @@ public class CartController {
         userService.delete_cart(carts);
         return ResponseEntity.ok().body(null);
     }
+    
 
 
 

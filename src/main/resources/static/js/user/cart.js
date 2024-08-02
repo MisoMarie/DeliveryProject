@@ -74,31 +74,31 @@ function delete_cart_items(items){
     });
 }
 // 구매 버튼 눌렀을 때
-// cartBuyBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     const items = collect_cart_selected_items();
-//     if(items.length <= 0){
-//         alert('상품을 하나이상 선택해주세요');
-//         return;
-//     }
-//     buy_cart_items(items);
-// });
+cartBuyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const items = collect_cart_selected_items();
+    if(items.length <= 0){
+        alert('상품을 하나이상 선택해주세요');
+        return;
+    }
+    buy_cart_items(items);
+});
 
 
-// // 장바구니 아이템들을 구매
-// function buy_cart_items(items){
-//     fetch(`/user/order`,{
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(items)
-//     }).then(response => {
-//         if(response.ok){
-//             location.href = '/user/order';
-//         }
-//     });
-// }
+// 장바구니 아이템들을 구매
+function buy_cart_items(items){
+    fetch(`/user/order`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(items)
+    }).then(response => {
+        if(response.ok){
+            location.href = '/user/cart';
+        }
+    });
+}
 
 
 // IMP.init("imp14271731");
