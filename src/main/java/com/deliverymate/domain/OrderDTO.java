@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class OrderDTO {
     private Integer orderNo;
+    private String orderUserId;
     private FoodDTO orderFoodId;
 
 }

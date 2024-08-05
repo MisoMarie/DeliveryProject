@@ -73,12 +73,43 @@ function delete_cart_items(items){
         }
     });
 }
+
 // 구매 버튼 눌렀을 때
+IMP.init("imp14271731");
 cartBuyBtn.addEventListener('click', (e) => {
     e.preventDefault();
     console.log("구매 버튼이 눌림")
+
+    let requestData;
+    let cost = document.getElementsByClassName('buy-amount');
+    const foodId = document.getElementsByClassName('product-no');
+    const merchantUid = `order_no_${new Date().getTime()}`; // 주문번호 생성
     const items = collect_cart_selected_items();
-    buy_cart_items(items);
+
+    // 음식을 선택하지 않고 결제 버튼을 누를시 경고 메시지 출력
+    if (items === null) {
+        alert("적어도 하나 이상의 음식을 담아야 합니다.");
+        return;
+    }
+
+    requestData = {
+        pg: "kakaopay.TC0ONETIME",
+        pay_method: "card",
+        name: "음식구매",
+        merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
+        food_id: foodId.value,
+        cost: cost.value,
+    };
+
+    IMP.request_pay(requestData, function (response){
+        if (response.success){
+            buy_cart_items(items);
+        }
+        else {
+            // 결제 실패 시 에러 처리
+            alert("결제가 실패하였습니다!");
+        }
+    })
 });
 
 
@@ -100,37 +131,3 @@ function buy_cart_items(items){
 }
 
 ////////////////////////////////////////
-IMP.init("imp14271731");
-const amountChoose = document.querySelectorAll('input[name="amount"]'); // amount에 장바구니 최종 금액이 들어감
-console.log(amountChoose);
-cartBuyBtn.onclick = buyFoods;
-////////////////////////////////////////
-
-function buyFoods(){
-    let requestData;
-    const foodId = document.getElementsByClassName('product-no');
-    const merchantUid = `order_no_${new Date().getTime()}`; // 주문번호 생성
-    try{
-        requestData = {
-            pg: "kakaopay.TC0ONETIME",
-            merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
-            food_id: foodId.value,
-        };
-        console.log(requestData);
-    }catch (e){
-        alert('음식 구매를 위해서는 로그인 해야 합니다');
-        console.log(e)
-        return;
-    }
-
-}
-
-
-const orderFoods = {
-    pg: "kakaopay.TC0ONETIME",
-    pay_method: "card",
-    merchant_uid: `order_no_${new Date().getTime()}`, // 주문 고유 번호
-    food_id: `foodId`,
-    buyer_id: `userId`,
-    amount: 64900,
-}
