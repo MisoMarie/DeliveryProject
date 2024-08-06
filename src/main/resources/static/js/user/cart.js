@@ -90,26 +90,25 @@ cartBuyBtn.addEventListener('click', (e) => {
     if (items === null) {
         alert("적어도 하나 이상의 음식을 담아야 합니다.");
         return;
+    }else{
+        requestData = {
+            pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
+            name: foodId.value,
+            amount: cost.value,
+        };
+
+        IMP.request_pay(requestData, function (response){
+            if (response.success){
+                buy_cart_items(items);
+            }
+            else {
+                // 결제 실패 시 에러 처리
+                alert("결제가 실패하였습니다!");
+            }
+        })
     }
-
-    requestData = {
-        pg: "kakaopay.TC0ONETIME",
-        pay_method: "card",
-        name: "음식구매",
-        merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
-        food_id: foodId.value,
-        cost: cost.value,
-    };
-
-    IMP.request_pay(requestData, function (response){
-        if (response.success){
-            buy_cart_items(items);
-        }
-        else {
-            // 결제 실패 시 에러 처리
-            alert("결제가 실패하였습니다!");
-        }
-    })
 });
 
 
