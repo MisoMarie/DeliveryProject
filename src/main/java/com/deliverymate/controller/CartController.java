@@ -1,15 +1,13 @@
 package com.deliverymate.controller;
 
 
-import com.deliverymate.domain.CartDTO;
-import com.deliverymate.domain.FoodDTO;
-import com.deliverymate.domain.StoreDTO;
-import com.deliverymate.domain.UserDTO;
+import com.deliverymate.domain.*;
 import com.deliverymate.service.UserService;
 import jakarta.mail.Store;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -94,12 +92,13 @@ public class CartController {
 
     // 장바구니에 있는 음식 주문
     @PostMapping("/order")
-    public void post_user_order(
-            @RequestBody List<CartDTO> carts,
-            HttpSession session
+    public ResponseEntity<Void> post_user_order(
+            @RequestBody CartDTO cart,
+            OrderDTO order
     ){
-        log.info(carts + "등록중..");
-        session.setAttribute("carts", carts);
+        log.info("주문 내역: " + cart);
+        userService.add_order(order, cart);
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
 

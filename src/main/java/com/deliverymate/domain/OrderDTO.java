@@ -2,6 +2,7 @@ package com.deliverymate.domain;
 
 
 import lombok.*;
+import org.apache.catalina.User;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 public class OrderDTO {
     private Integer orderNo;
-    private String orderUserId;
-    private FoodDTO orderFoodId;
+    private CartDTO orderUserId;
+    private CartDTO orderFoodId;
 
 }

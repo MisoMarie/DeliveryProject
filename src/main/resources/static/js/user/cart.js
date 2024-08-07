@@ -124,7 +124,7 @@ function buy_cart_items(items){
         body: JSON.stringify(items)
     }).then(response => {
         if(response.ok){
-            location.href = '/user/cart';
+            location.href = '/user/cart'; // 주문 후 이동할 주소
         }
     });
 }

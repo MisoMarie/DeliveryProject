@@ -2,6 +2,7 @@ package com.deliverymate.service;
 
 import com.deliverymate.domain.*;
 import com.deliverymate.mapper.UserMapper;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j2
 @Service
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -69,9 +71,14 @@ public class UserService {
         userMapper.deleteCart(carts);
     }
 
-
-
-
+    /****************** 결제 *****************************/
+    public void add_order(OrderDTO order, CartDTO cart){
+        order.setOrderUserId(cart); // 결제자 (주문자) 설정
+        order.setOrderFoodId(cart);
+        System.out.println(cart);
+        userMapper.insertOrder(order); // 주문정보
+        userMapper.insertOrderProducts(order); // 주문 상품들
+    }
 
 
     /*********************** wishlist **************************/

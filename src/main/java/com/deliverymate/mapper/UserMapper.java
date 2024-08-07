@@ -53,6 +53,8 @@ public interface UserMapper {
     void insertCart(CartDTO cart); // 장바구니에 유저 상품 추가
     void deleteCart(List<CartDTO> carts); // 해당 장바구니들을 삭제
 
+    void insertOrder(OrderDTO order); // 주문 정보(결제정보) 등록
+    void insertOrderProducts(OrderDTO order); // 위 주문에 해당하는 상품 정보 등록
 
 
 

@@ -85,6 +85,11 @@
         </foreach>
     </delete>
 
+    <insert id="insertOrder">
+        INSERT INTO `order` (order_no, user_user_id, order_merchant)
+        VALUES (#{orderNo}, #{cart.user}, #{cart.food})
+    </insert>
+
 
 
 
