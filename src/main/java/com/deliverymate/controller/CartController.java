@@ -93,11 +93,12 @@ public class CartController {
     // 장바구니에 있는 음식 주문
     @PostMapping("/order")
     public ResponseEntity<Void> post_user_order(
-            @RequestBody CartDTO cart,
-            OrderDTO order
+            @RequestBody OrderDTO order
     ){
-        log.info("주문 내역: " + cart);
-        userService.add_order(order, cart);
+        System.out.println("주문 내역: " + order);
+        String id = order.getOrderMerchantId();
+//        CartDTO user = order.setOrderUserId();
+//        userService.add_order(order, user, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 

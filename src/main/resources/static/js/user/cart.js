@@ -1,11 +1,9 @@
 const orderForm = document.getElementById('order-form');
 const productContainers = document.getElementsByClassName('product');
-console.log(productContainers)
 const csrfTokenInput = orderForm.querySelector('input[name="_csrf"]');
 const allSectionBtn = document.querySelector('.cart-select-container input[type="checkbox"]');
 const allRmBtn = document.getElementById('cart-all-rm-btn');
 const cartBuyBtn = document.getElementById('cart-buy-btn');
-
 
 // 전체 선택 버튼 눌렀을 때
 allSectionBtn.addEventListener('click', () => {
@@ -52,6 +50,7 @@ function collect_cart_selected_items(){
                 amount: amount,
                 price: price
             });
+            console.log(items)
         }
     });
     return items;
@@ -79,24 +78,44 @@ IMP.init("imp14271731");
 cartBuyBtn.addEventListener('click', (e) => {
     e.preventDefault();
     console.log("구매 버튼이 눌림")
-
     let requestData;
-    let cost = document.getElementsByClassName('buy-amount');
+    let cost = document.getElementById('buy-amount');
     const foodId = document.getElementsByClassName('product-no');
     const merchantUid = `order_no_${new Date().getTime()}`; // 주문번호 생성
-    const items = collect_cart_selected_items();
+    const items = [];
+    // 모든 장바구니 상품들을 순회한다
+    [...productContainers].forEach(productContainer => {
+        const cartNoInput = productContainer.querySelector('input[name=no]');
+        // 상품들 선택
+            const productNo = +productContainer.querySelector('.product-no').value;
+            const name = productContainer.querySelector('.name').textContent;
+            const amount = +productContainer.querySelector('.amount').textContent.replaceAll('개', '');
+            const price = +productContainer.querySelector('.price').textContent.replaceAll(',','').replaceAll('원','');
+            items.push({
+                cart_no: +cartNoInput.value,
+                product: { no: productNo, name: name },
+                amount: amount,
+                price: price
+            });
+            console.log(items)
+    });
+
+    console.log(cost.getAttribute("data"))
+    console.log(foodId[0])
+    console.log(merchantUid)
+    console.log(items)
 
     // 음식을 선택하지 않고 결제 버튼을 누를시 경고 메시지 출력
-    if (items === null) {
+    if (items == null) {
         alert("적어도 하나 이상의 음식을 담아야 합니다.");
         return;
     }else{
         requestData = {
             pg: "kakaopay.TC0ONETIME",
-            pay_method: "card",
+            name: foodId[0].value,
+            amount: +cost.getAttribute("data"),
             merchant_uid: merchantUid, // 상점에서 생성한 고유 주문번호
-            name: foodId.value,
-            amount: cost.value,
+            pay_method: "kakaopay",
         };
 
         IMP.request_pay(requestData, function (response){
@@ -112,16 +131,22 @@ cartBuyBtn.addEventListener('click', (e) => {
 });
 
 
+
 // 장바구니 아이템들을 구매
 function buy_cart_items(items){
     const csrfToken = csrfTokenInput.value;
+    const orderData = {
+        merchantUid: merchantUid,
+        items: items
+    };
+
     fetch(`/user/order`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken
         },
-        body: JSON.stringify(items)
+        body: JSON.stringify(orderData)
     }).then(response => {
         if(response.ok){
             location.href = '/user/cart'; // 주문 후 이동할 주소

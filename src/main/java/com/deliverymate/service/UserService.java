@@ -72,12 +72,12 @@ public class UserService {
     }
 
     /****************** 결제 *****************************/
-    public void add_order(OrderDTO order, CartDTO cart){
-        order.setOrderUserId(cart); // 결제자 (주문자) 설정
-        order.setOrderFoodId(cart);
-        System.out.println(cart);
+    public void add_order(OrderDTO order, CartDTO user, String id){
+        order.setOrderUserId(user); // 결제자 (주문자) 설정
+        order.setOrderMerchantId(id);
+        System.out.println(user);
         userMapper.insertOrder(order); // 주문정보
-        userMapper.insertOrderProducts(order); // 주문 상품들
+//        userMapper.insertOrderProducts(order); // 주문 상품들
     }
 
 

@@ -13,6 +13,5 @@ import org.apache.catalina.User;
 public class OrderDTO {
     private Integer orderNo;
     private CartDTO orderUserId;
-    private CartDTO orderFoodId;
-
+    private String orderMerchantId;
 }
